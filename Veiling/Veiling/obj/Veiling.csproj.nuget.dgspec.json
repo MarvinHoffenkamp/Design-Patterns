@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Robin\\OneDrive - NHL Stenden\\Documents\\GitHub\\Design-Patterns\\Veiling\\Veiling\\Veiling.csproj": {}
+    "C:\\Users\\Kariem\\OneDrive\\Documenten\\GitHub\\Design-Patterns\\Veiling\\Veiling\\Veiling.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Robin\\OneDrive - NHL Stenden\\Documents\\GitHub\\Design-Patterns\\Veiling\\Veiling\\Veiling.csproj": {
+    "C:\\Users\\Kariem\\OneDrive\\Documenten\\GitHub\\Design-Patterns\\Veiling\\Veiling\\Veiling.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Robin\\OneDrive - NHL Stenden\\Documents\\GitHub\\Design-Patterns\\Veiling\\Veiling\\Veiling.csproj",
+        "projectUniqueName": "C:\\Users\\Kariem\\OneDrive\\Documenten\\GitHub\\Design-Patterns\\Veiling\\Veiling\\Veiling.csproj",
         "projectName": "Veiling",
-        "projectPath": "C:\\Users\\Robin\\OneDrive - NHL Stenden\\Documents\\GitHub\\Design-Patterns\\Veiling\\Veiling\\Veiling.csproj",
-        "packagesPath": "C:\\Users\\Robin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Robin\\OneDrive - NHL Stenden\\Documents\\GitHub\\Design-Patterns\\Veiling\\Veiling\\obj\\",
+        "projectPath": "C:\\Users\\Kariem\\OneDrive\\Documenten\\GitHub\\Design-Patterns\\Veiling\\Veiling\\Veiling.csproj",
+        "packagesPath": "C:\\Users\\Kariem\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Kariem\\OneDrive\\Documenten\\GitHub\\Design-Patterns\\Veiling\\Veiling\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\"
+          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "C:\\Users\\Robin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Kariem\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
@@ -30,6 +30,7 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
             "projectReferences": {}
           }
         },
@@ -41,6 +42,7 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "imports": [
             "net461",
             "net462",
@@ -51,12 +53,18 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[3.1.18, 3.1.18]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.303\\RuntimeIdentifierGraph.json"
         }
       }
     }
