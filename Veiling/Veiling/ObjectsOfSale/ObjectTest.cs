@@ -4,7 +4,8 @@ using System.Text;
 
 namespace Veiling.ObjectsOfSale
 {
-    class Class1
+    interface ObjectTest
     {
+        bool doTest();
     }
 }
