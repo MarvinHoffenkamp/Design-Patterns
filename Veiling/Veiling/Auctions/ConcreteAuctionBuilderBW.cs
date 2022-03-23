@@ -1,43 +1,48 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Veiling.ObjectsOfSale;
 
 namespace Veiling.Auctions
 {
     class ConcreteAuctionBuilderBW : IAuctionBuilder
     {
-        //TODO change datatype of list to ObjectOfSale once class implemented
-        private ConcreteAuctionBuilderBW result;
-        private List<String> objectsOfSale;
+        private Auction result;
 
-        public void addAuctioneer()
+        public ConcreteAuctionBuilderBW()
         {
-            throw new NotImplementedException();
+            this.result = new Auction();
         }
 
-        public void addBuyer()
+        public void addAuctioneer(Auctioneer auctioneer)
         {
-            throw new NotImplementedException();
+            this.result.setAuctioneer(auctioneer);
         }
 
-        public void addObjectOfSale()
+        public void addBuyer(String buyer)
         {
-            throw new NotImplementedException();
+            this.result.addBuyer(buyer);
+        }
+
+        public void addObjectOfSale(ObjectOfSale objectOfSale)
+        {
+            int[] measurements = objectOfSale.getMeasurements();
+            //TODO make condition to only add big objects
         }
 
         public void reset()
         {
-            throw new NotImplementedException();
+            this.result = new Auction();
         }
 
-        public ConcreteAuctionBuilderBW getResult()
+        public Auction getResult()
         {
             return this.result;
         }
 
-        public List<String> getObjectsOfSale()
+        public void setAuctionType()
         {
-            return this.objectsOfSale;
+            this.result.setAuctionType("Big warehouse auction");
         }
     }
 }
