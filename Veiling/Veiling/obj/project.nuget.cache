@@ -1,10 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "xMiBYWn2ZqaR0XUOU18e95QSoBh7AdDqYd5eW00pVPhd4ho8FEQfmYfJyLR6N7htJe53D5a22qoXfQ0Xu0qRtA==",
+  "dgSpecHash": "IxaOOaya3GEurwbqlDM4lulab8J8WvVWDrOi7tTShtWLfZP/JwPuO7x38rN/Dcyeh1p50EwWGPoB6WTJjP8W4g==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Kariem\\OneDrive\\Documenten\\GitHub\\Design-Patterns\\Veiling\\Veiling\\Veiling.csproj",
+  "projectFilePath": "C:\\Users\\Marvin\\Source\\Repos\\MarvinHoffenkamp\\Design-Patterns\\Veiling\\Veiling\\Veiling.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Kariem\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.18\\microsoft.netcore.app.host.win-x64.3.1.18.nupkg.sha512"
+    "C:\\Users\\Marvin\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.22\\microsoft.netcore.app.host.win-x64.3.1.22.nupkg.sha512",
+    "C:\\Users\\Marvin\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.10\\microsoft.aspnetcore.app.ref.3.1.10.nupkg.sha512",
+    "C:\\Users\\Marvin\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\3.1.0\\microsoft.windowsdesktop.app.ref.3.1.0.nupkg.sha512",
+    "C:\\Users\\Marvin\\.nuget\\packages\\microsoft.netcore.app.ref\\3.1.0\\microsoft.netcore.app.ref.3.1.0.nupkg.sha512"
   ],
   "logs": []
 }
