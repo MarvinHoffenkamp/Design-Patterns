@@ -26,8 +26,8 @@ namespace Veiling.Auctions
 
         public void addObjectOfSale(ObjectOfSale objectOfSale)
         {
-            int[] measurements = objectOfSale.getMeasurements();
             this.result.addObjectOfSale(objectOfSale);
+            Console.WriteLine("Added {0} to the auction list.", objectOfSale.getBrand());
         }
 
         public void reset()

@@ -12,7 +12,13 @@ namespace Veiling
         private List<ObjectOfSale> objectsOfSale;
         //TODO change datatype to Buyer
         private List<String> buyers;
-        private String auctionType;
+        private string auctionType;
+
+        public Auction()
+        {
+            this.objectsOfSale = new List<ObjectOfSale>();
+            this.buyers = new List<String>();
+        }
 
         public void setAuctioneer(Auctioneer auctioneer)
         {
@@ -54,12 +60,12 @@ namespace Veiling
             this.buyers.Add(buyer);
         }
 
-        public void setAuctionType(String type)
+        public void setAuctionType(string type)
         {
             this.auctionType = type;
         }
 
-        public String getAuctionType()
+        public string getAuctionType()
         {
             return this.auctionType;
         }
