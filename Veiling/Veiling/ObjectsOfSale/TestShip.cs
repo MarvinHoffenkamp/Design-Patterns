@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Veiling.ObjectsOfSale
 {
-    class TestShip : ObjectTest
+    class TestShip : IObjectTest
     {
         public bool doTest()
         {

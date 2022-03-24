@@ -9,7 +9,7 @@ namespace Veiling.ObjectsOfSale
         private String brand; //brand of the object
         private int[] measurements = new int[3]; //width, height and length of the object
         private double estimatedValue; //estimated value of the object at auction
-        public abstract ObjectTest TestObject();
+        public abstract IObjectTest TestObject();
 
         public ObjectOfSale(string brand, int[] measurements, double estimatedValue)
         {

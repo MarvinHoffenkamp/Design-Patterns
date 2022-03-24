@@ -11,7 +11,7 @@ namespace Veiling.ObjectsOfSale
             
         }
         
-        public override ObjectTest TestObject()
+        public override IObjectTest TestObject()
         {
             return new TestCar();
         }

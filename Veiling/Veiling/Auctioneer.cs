@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Veiling.Auctions;
+using Veiling.ObjectsOfSale;
+using Veiling.States;
 
 namespace Veiling
 {
@@ -11,7 +12,7 @@ namespace Veiling
          * TODO: methods nu void, graag veranderen naar juiste return types wanneer mogelijk
          */
 
-        public Auctioneer(State state, ObjectOfSale objectOfSale, double currentBid, Buyer[] buyers)
+        public Auctioneer(State state, ObjectOfSale objectOfSale, double currentBid, String[] buyers)
         {
 
         }
@@ -21,7 +22,7 @@ namespace Veiling
 
         }
 
-        public void moveObjectOfSale(ObjectOfSale)
+        public void moveObjectOfSale(ObjectOfSale objectOfSale)
         {
 
         }

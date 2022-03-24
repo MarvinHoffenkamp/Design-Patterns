@@ -4,16 +4,16 @@ using System.Text;
 
 namespace Veiling.ObjectsOfSale
 {
-    class Motorcycle : ObjectOfSale
+    class Smartphone : ObjectOfSale
     {
-        public Motorcycle(string brand, int[] measurements, double estimatedValue) : base(brand, measurements, estimatedValue)
+        public Smartphone(string brand, int[] measurements, double estimatedValue) : base(brand, measurements, estimatedValue)
         {
 
         }
 
         public override IObjectTest TestObject()
         {
-            return new TestMotorcycle();
+            return new TestSmartphone();
         }
     }
 }

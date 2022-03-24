@@ -9,7 +9,7 @@ namespace Veiling
     {
         static void Main(string[] args)
         {
-
+            
             /*
              * Testing for Factory Method
              *

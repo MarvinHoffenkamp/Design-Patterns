@@ -4,13 +4,12 @@ using System.Text;
 
 namespace Veiling.ObjectsOfSale
 {
-    class TestCar : IObjectTest
+    class TestGameConsole : IObjectTest
     {
         public bool doTest()
         {
-            //return true or false at random
-            var random = new Random();
-            return random.Next(2) == 1;
+            //return always true
+            return true;
         }
     }
 }
