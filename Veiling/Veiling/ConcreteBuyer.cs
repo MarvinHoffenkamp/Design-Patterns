@@ -11,14 +11,21 @@ namespace Veiling
         private double wallet;
         private List<ObjectOfSale> boughtObjects;
 
-        public ConcreteBuyer()
+        public ConcreteBuyer(int buyersNumber, double wallet)
         {
-
+            this.buyersNumber = buyersNumber;
+            this.wallet = wallet;
+            this.boughtObjects = new List<ObjectOfSale>();
         }
 
         public void bit(double price)
         {
             throw new NotImplementedException();
+        }
+
+        public int getBuyersNumber()
+        {
+            return this.buyersNumber;
         }
     }
 }

@@ -12,6 +12,7 @@ namespace Veiling.Auctions
         public ConcreteAuctionBuilderO()
         {
             this.result = new Auction();
+            this.setAuctionType();
         }
 
         public void addAuctioneer(Auctioneer auctioneer)
@@ -19,7 +20,7 @@ namespace Veiling.Auctions
             this.result.setAuctioneer(auctioneer);
         }
 
-        public void addBuyer(String buyer)
+        public void addBuyer(Buyer buyer)
         {
             this.result.addBuyer(buyer);
         }
@@ -27,7 +28,7 @@ namespace Veiling.Auctions
         public void addObjectOfSale(ObjectOfSale objectOfSale)
         {
             this.result.addObjectOfSale(objectOfSale);
-            Console.WriteLine("Added {0} to the auction list.", objectOfSale.getBrand());
+            Console.WriteLine("Added {0} to the auction list.", objectOfSale.getBrand()); //allow all objects to be sold online
         }
 
         public void reset()
@@ -40,7 +41,7 @@ namespace Veiling.Auctions
             return this.result;
         }
 
-        public void setAuctionType()
+        private void setAuctionType()
         {
             this.result.setAuctionType("Online auction");
         }

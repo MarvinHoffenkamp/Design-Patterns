@@ -12,6 +12,7 @@ namespace Veiling.Auctions
         public ConcreteAuctionBuilderBW()
         {
             this.result = new Auction();
+            this.setAuctionType();
         }
 
         public void addAuctioneer(Auctioneer auctioneer)
@@ -19,10 +20,10 @@ namespace Veiling.Auctions
             this.result.setAuctioneer(auctioneer);
         }
 
-        public void addBuyer(String buyer)
+        public void addBuyer(Buyer buyer)
         {
             this.result.addBuyer(buyer);
-            Console.WriteLine("Buyer with number {0} started walking around the auction.", buyer/*.buyersNumber*/);
+            Console.WriteLine("Buyer with number {0} started walking around the auction.", buyer.getBuyersNumber());
         }
 
         public void addObjectOfSale(ObjectOfSale objectOfSale)
@@ -32,14 +33,15 @@ namespace Veiling.Auctions
             int height = measurements[1];
             int length = measurements[2];
 
+            //only allow objects bigger then 1 meter to be sold in a big warehouse
             if (width <= 100 || height <= 100 || length <= 100)
             {
-                Console.WriteLine("{0} is to small to be sold in this warehouse.", objectOfSale.getBrand());
+                Console.WriteLine("{0} is to small to be sold in this auction.", objectOfSale.GetType().Name);
                 return;
             }
 
             this.result.addObjectOfSale(objectOfSale);
-            Console.WriteLine("Added {0} to the auction list.", objectOfSale.getBrand());
+            Console.WriteLine("Added {0} to the auction list.", objectOfSale.GetType().Name);
         }
 
         public void reset()
@@ -52,7 +54,7 @@ namespace Veiling.Auctions
             return this.result;
         }
 
-        public void setAuctionType()
+        private void setAuctionType()
         {
             this.result.setAuctionType("Big warehouse auction");
         }

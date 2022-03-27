@@ -7,5 +7,6 @@ namespace Veiling
     interface Buyer
     {
         void bit(double price);
+        int getBuyersNumber();
     }
 }

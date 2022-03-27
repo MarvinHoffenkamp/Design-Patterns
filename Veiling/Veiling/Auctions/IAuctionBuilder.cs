@@ -9,9 +9,8 @@ namespace Veiling.Auctions
     {
         void reset();
         void addAuctioneer(Auctioneer auctioneer);
-        void addBuyer(String buyer);
+        void addBuyer(Buyer buyer);
         void addObjectOfSale(ObjectOfSale objectsOfSale);
-        void setAuctionType();
         Auction getResult();
     }
 }
