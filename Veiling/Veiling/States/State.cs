@@ -5,9 +5,15 @@ using Veiling.ObjectsOfSale;
 
 namespace Veiling.States
 {
-    internal interface State
+    abstract class State
     {
-        void moveObjectOfSale(ObjectOfSale objectOfSale);
-        void announceActionState();
+        protected Auctioneer auctioneer;
+
+        public void setContext(Auctioneer auctioneer)
+        {
+            this.auctioneer = auctioneer;
+        }
+        public abstract void moveObjectOfSale(ObjectOfSale objectOfSale);
+        public abstract void setAuctionState(State state);
     }
 }

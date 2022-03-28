@@ -24,3 +24,17 @@ C:\Users\Kariem\OneDrive\Documenten\GitHub\Design-Patterns\Veiling\Veiling\bin\D
 C:\Users\Kariem\OneDrive\Documenten\GitHub\Design-Patterns\Veiling\Veiling\bin\Debug\netcoreapp3.1\Veiling.dll
 C:\Users\Kariem\OneDrive\Documenten\GitHub\Design-Patterns\Veiling\Veiling\bin\Debug\netcoreapp3.1\Veiling.pdb
 C:\Users\Kariem\OneDrive\Documenten\GitHub\Design-Patterns\Veiling\Veiling\obj\Debug\netcoreapp3.1\Veiling.genruntimeconfig.cache
+C:\Users\Marvin\Source\Repos\MarvinHoffenkamp\Design-Patterns\Veiling\Veiling\bin\Debug\netcoreapp3.1\Veiling.exe
+C:\Users\Marvin\Source\Repos\MarvinHoffenkamp\Design-Patterns\Veiling\Veiling\bin\Debug\netcoreapp3.1\Veiling.deps.json
+C:\Users\Marvin\Source\Repos\MarvinHoffenkamp\Design-Patterns\Veiling\Veiling\bin\Debug\netcoreapp3.1\Veiling.runtimeconfig.json
+C:\Users\Marvin\Source\Repos\MarvinHoffenkamp\Design-Patterns\Veiling\Veiling\bin\Debug\netcoreapp3.1\Veiling.runtimeconfig.dev.json
+C:\Users\Marvin\Source\Repos\MarvinHoffenkamp\Design-Patterns\Veiling\Veiling\bin\Debug\netcoreapp3.1\Veiling.dll
+C:\Users\Marvin\Source\Repos\MarvinHoffenkamp\Design-Patterns\Veiling\Veiling\bin\Debug\netcoreapp3.1\Veiling.pdb
+C:\Users\Marvin\Source\Repos\MarvinHoffenkamp\Design-Patterns\Veiling\Veiling\obj\Debug\netcoreapp3.1\Veiling.csproj.AssemblyReference.cache
+C:\Users\Marvin\Source\Repos\MarvinHoffenkamp\Design-Patterns\Veiling\Veiling\obj\Debug\netcoreapp3.1\Veiling.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Marvin\Source\Repos\MarvinHoffenkamp\Design-Patterns\Veiling\Veiling\obj\Debug\netcoreapp3.1\Veiling.AssemblyInfoInputs.cache
+C:\Users\Marvin\Source\Repos\MarvinHoffenkamp\Design-Patterns\Veiling\Veiling\obj\Debug\netcoreapp3.1\Veiling.AssemblyInfo.cs
+C:\Users\Marvin\Source\Repos\MarvinHoffenkamp\Design-Patterns\Veiling\Veiling\obj\Debug\netcoreapp3.1\Veiling.csproj.CoreCompileInputs.cache
+C:\Users\Marvin\Source\Repos\MarvinHoffenkamp\Design-Patterns\Veiling\Veiling\obj\Debug\netcoreapp3.1\Veiling.dll
+C:\Users\Marvin\Source\Repos\MarvinHoffenkamp\Design-Patterns\Veiling\Veiling\obj\Debug\netcoreapp3.1\Veiling.pdb
+C:\Users\Marvin\Source\Repos\MarvinHoffenkamp\Design-Patterns\Veiling\Veiling\obj\Debug\netcoreapp3.1\Veiling.genruntimeconfig.cache

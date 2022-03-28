@@ -11,15 +11,18 @@ namespace Veiling
         /*
          * TODO: methods nu void, graag veranderen naar juiste return types wanneer mogelijk
          */
+        private State state = null;
 
         public Auctioneer(State state, ObjectOfSale objectOfSale, double currentBid, String[] buyers)
         {
-
+            this.TransitionTo(state);
         }
 
-        public void changeState(State state)
+        public void TransitionTo(State state)
         {
-
+            Console.WriteLine("changing state to {0}", state);
+            this.state = state;
+            this.state.setContext(this);
         }
 
         public void moveObjectOfSale(ObjectOfSale objectOfSale)
@@ -27,7 +30,7 @@ namespace Veiling
 
         }
 
-        public void announceActionState()
+        public void setAuctionState()
         {
 
         }

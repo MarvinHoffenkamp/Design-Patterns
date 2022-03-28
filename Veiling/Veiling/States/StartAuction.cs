@@ -7,18 +7,15 @@ namespace Veiling.States
 {
     class StartAuction : State
     {
-        public StartAuction(Auctioneer auctioneer)
+        public override void moveObjectOfSale(ObjectOfSale objectOfSale)
         {
-
-        }
-        public void moveObjectOfSale(ObjectOfSale objectOfSale)
-        {
-            throw new NotImplementedException();
+            Console.WriteLine("object moved!");
         }
 
-        void State.announceActionState()
+        public override void setAuctionState(State state)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("auction state set!");
+            this.auctioneer.TransitionTo(state);
         }
     }
 }
