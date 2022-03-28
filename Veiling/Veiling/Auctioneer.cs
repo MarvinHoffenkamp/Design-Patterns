@@ -13,7 +13,7 @@ namespace Veiling
          */
         private State state = null;
 
-        public Auctioneer(State state, ObjectOfSale objectOfSale, double currentBid, String[] buyers)
+        public Auctioneer(State state, ObjectOfSale objectOfSale, double currentBid, Buyer[] buyers)
         {
             this.TransitionTo(state);
         }

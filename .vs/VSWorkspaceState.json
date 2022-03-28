@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Veiling",
+    "\\Veiling\\Veiling"
   ],
-  "SelectedNode": "\\Veiling.sln",
+  "SelectedNode": "\\Veiling\\Veiling.sln",
   "PreviewInSolutionExplorer": false
 }
