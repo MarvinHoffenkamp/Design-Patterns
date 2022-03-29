@@ -27,8 +27,8 @@ namespace Veiling
             Console.WriteLine("Motorcycle: " + suzuki.turnOn());
             */
 
-            //testBuilder();
-            testStates();
+            testBuilder();
+            //testStates();
         }
 
         public static void testBuilder()
@@ -76,6 +76,9 @@ namespace Veiling
 
             Console.WriteLine("======================================");
 
+            var auctioneer = new Auctioneer(new StartAuction(), builder.getResult().getBuyers());
+            builder.addAuctioneer(auctioneer);
+
             var auction = builder.getResult();
 
             Console.WriteLine("Amount of buyers: {0}", auction.getBuyers().Count);
@@ -116,13 +119,13 @@ namespace Veiling
 
             var notReallyRandomAmountOfBuyers = 16;
 
-            Buyer[] buyers = new Buyer[notReallyRandomAmountOfBuyers];
+            List<Buyer> buyers = new List<Buyer>();
             for (int i = 1; i < notReallyRandomAmountOfBuyers; i++) //adds random amount of buyers to the auction
             {
                 var wallet = 1000 + (random.NextDouble() * (10000 - 1000)); //add random amount of money to wallet between 1000 and 10000
                 buyers[i] = new ConcreteBuyer(i, wallet); //adds buyer to auction
             };
-            var auctioneer1 = new Auctioneer(state1, objectToSell, 100.00, buyers);
+            var auctioneer1 = new Auctioneer(state1, buyers);
             auctioneer1.TransitionTo(state2);
             auctioneer1.TransitionTo(state3);
         }

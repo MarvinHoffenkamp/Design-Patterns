@@ -18,7 +18,7 @@ namespace Veiling
             this.boughtObjects = new List<ObjectOfSale>();
         }
 
-        public void bit(double price)
+        public void bid(double price)
         {
             throw new NotImplementedException();
         }
