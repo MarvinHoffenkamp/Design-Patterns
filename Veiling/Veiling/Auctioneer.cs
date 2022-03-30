@@ -12,10 +12,46 @@ namespace Veiling
          * TODO: methods nu void, graag veranderen naar juiste return types wanneer mogelijk
          */
         private State state = null;
+        private double currentBid;
+        private List<Buyer> buyers;
 
         public Auctioneer(State state, List<Buyer> buyers)
         {
             this.TransitionTo(state);
+            this.currentBid = 0.00;
+            this.buyers = buyers;
+        }
+
+        public double getCurrentBid()
+        {
+            return this.currentBid;
+        }
+
+        public void setCurrentBid(double newCurrentBid)
+        {
+            currentBid = newCurrentBid;
+        }
+
+        public List<Buyer> getBuyers()
+        {
+            return this.buyers;
+        }
+
+        public void addBuyer(Buyer buyer)
+        {
+            buyer.setAuctioneer(this);
+            this.buyers.Add(buyer);
+        }
+
+        public void setBuyers(List<Buyer> newBuyers)
+        {
+            List<Buyer> buyersWithAuctioneer = new List<Buyer>();
+            foreach (Buyer buyer in buyers)
+            {
+                buyer.setAuctioneer(this);
+                buyersWithAuctioneer.Add(buyer);
+            }
+            buyers = buyersWithAuctioneer;
         }
 
         public void TransitionTo(State state)
@@ -35,20 +71,28 @@ namespace Veiling
 
         }
 
-        public void joinAuction()
+        public void joinAuction(Buyer joiningBuyer)
         {
-
+            addBuyer(joiningBuyer);
         }
 
-        public void leaveAuction()
+        public void leaveAuction(Buyer leavingBuyer)
         {
-
+            getBuyers().Remove(leavingBuyer);
         }
 
         public void notifyBuyers()
         {
+            foreach (Buyer buyer in getBuyers())
+            {
+                buyer.bid(getCurrentBid());
+            }
+        }
 
+        public void notifiedByBuyer(double bid)
+        {
+            setCurrentBid(bid);
+            notifyBuyers();
         }
     }
-
 }

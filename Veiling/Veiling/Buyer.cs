@@ -7,6 +7,8 @@ namespace Veiling
     interface Buyer
     {
         void bid(double price);
+        void doBid();
         int getBuyersNumber();
+        void setAuctioneer(Auctioneer auctioneer);
     }
 }
