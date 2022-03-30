@@ -27,6 +27,7 @@ namespace Veiling
             Console.WriteLine("Motorcycle: " + suzuki.turnOn());
             */
 
+            Simulator.start();
         }
     }
 }
