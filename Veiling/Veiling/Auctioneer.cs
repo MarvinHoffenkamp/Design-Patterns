@@ -20,7 +20,7 @@ namespace Veiling
 
         public void TransitionTo(State state)
         {
-            Console.WriteLine("changing state to {0}", state);
+            Console.WriteLine("changing state to {0}", state.GetType().Name);
             this.state = state;
             this.state.setContext(this);
         }
