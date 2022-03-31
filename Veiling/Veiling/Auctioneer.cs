@@ -77,23 +77,39 @@ namespace Veiling
 
         public void TransitionTo(State state)
         {
-            Console.WriteLine("changing state to {0}", state.GetType().Name);
+            Console.WriteLine("Changing state to {0}", state.GetType().Name);
             //get current state, then check
-            if(this.state.GetType().Name == "StartAuction")
+            if (this.state == null)
             {
-              if(state.GetType().Name == "AuctionInProgress"){
-                    this.state = state;
-                }
-            } else if (this.state.GetType().Name == "AuctionInProgress")
+                this.state = state;
+                Console.WriteLine("Changed state to {0}", this.state.GetType().Name);
+            }
+            else if (this.state.GetType().Name == "StartAuction")
             {
-                if(state.GetType().Name == "EndAuction")
+                if (state.GetType().Name == "AuctionInProgress")
                 {
                     this.state = state;
+                    Console.WriteLine("Changed state to {0}", this.state.GetType().Name);
                 }
-            } else if (state.GetType().Name == "StartAuction")
+            }
+            else if (this.state.GetType().Name == "AuctionInProgress")
+            {
+                if (state.GetType().Name == "EndAuction")
+                {
+                    this.state = state;
+                    Console.WriteLine("Changed state to {0}", this.state.GetType().Name);
+                }
+            }
+            else if (state.GetType().Name == "StartAuction")
             {
                 //assume state is EndAuction, hence only check if incoming state is StartAuction
                 this.state = state;
+                Console.WriteLine("Changed state to {0}", this.state.GetType().Name);
+            }
+            else if (this.state.GetType().Name == "EndAuction")
+            {
+                this.state = null;
+                Console.WriteLine("Changed state to {0}", this.state.GetType().Name);
             }
             this.state.setContext(this);
         }

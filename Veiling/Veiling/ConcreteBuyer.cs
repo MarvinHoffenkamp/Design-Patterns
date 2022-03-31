@@ -27,6 +27,7 @@ namespace Veiling
         {
             //throw new NotImplementedException();
             setCurrentBid(price);
+            doBid();
         }
 
         public void doBid()
