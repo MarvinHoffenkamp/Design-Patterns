@@ -13,13 +13,15 @@ namespace Veiling
          */
         private State state = null;
         private double currentBid;
+        private double lastBid;
         private List<Buyer> buyers;
 
-        public Auctioneer(State state, List<Buyer> buyers)
+        public Auctioneer(State state)
         {
             this.TransitionTo(state);
             this.currentBid = 0.00;
-            this.buyers = buyers;
+            this.lastBid = 0.00;
+            this.buyers = new List<buyers>;
         }
 
         public double getCurrentBid()

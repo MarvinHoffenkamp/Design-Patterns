@@ -46,13 +46,7 @@ namespace Veiling
 
         public void setBuyers(List<Buyer> buyers)
         {
-            List<Buyer> buyersWithAuctioneer = new List<Buyer>();
-            foreach (Buyer buyer in buyers)
-            {
-                buyer.setAuctioneer(auctioneer);
-                buyersWithAuctioneer.Add(buyer);
-            }
-            this.buyers = buyersWithAuctioneer;
+            this.buyers = buyers;
         }
 
         public List<Buyer> getBuyers()
@@ -62,7 +56,6 @@ namespace Veiling
 
         public void addBuyer(Buyer buyer)
         {
-            buyer.setAuctioneer(auctioneer);
             this.buyers.Add(buyer);
         }
 
