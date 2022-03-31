@@ -28,7 +28,7 @@ namespace Veiling.Auctions
         public void addObjectOfSale(ObjectOfSale objectOfSale)
         {
             this.result.addObjectOfSale(objectOfSale);
-            Console.WriteLine("Added {0} to the auction list.", objectOfSale.getBrand()); //allow all objects to be sold online
+            Console.WriteLine("Added {0} {1} to the auction list.", objectOfSale.getBrand(), objectOfSale.GetType().Name); //allow all objects to be sold online
         }
 
         public void reset()

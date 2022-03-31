@@ -36,12 +36,12 @@ namespace Veiling.Auctions
             //only allow objects bigger then 1 meter to be sold in a big warehouse
             if (width <= 100 || height <= 100 || length <= 100)
             {
-                Console.WriteLine("{0} is to small to be sold in this auction.", objectOfSale.GetType().Name);
+                Console.WriteLine("{0} {1} is to small to be sold in this auction.", objectOfSale.getBrand(), objectOfSale.GetType().Name);
                 return;
             }
 
             this.result.addObjectOfSale(objectOfSale);
-            Console.WriteLine("Added {0} to the auction list.", objectOfSale.GetType().Name);
+            Console.WriteLine("Added {0} {1} to the auction list.", objectOfSale.getBrand(), objectOfSale.GetType().Name);
         }
 
         public void reset()

@@ -33,8 +33,8 @@ namespace Veiling
                     Console.WriteLine("Not fully implemented yet.");
                     break;
                 case "4":
-                    //simulateOwnAuction();
-                    Console.WriteLine("Not fully implemented yet.");
+                    simulateOwnAuction();
+                    //Console.WriteLine("Not fully implemented yet.");
                     break;
                 default:
                     Console.WriteLine("Sorry, the chosen option does not exist. Please choose a correct option.");
@@ -115,13 +115,50 @@ namespace Veiling
                 _ => new ConcreteAuctionBuilderO(),
             };
 
+            addChosenBuyers(builder, amountOfBuyers);
+            addChosenObjectsOfSale(builder, amountOfObjects);
+            
+            var auctioneer = new Auctioneer(new StartAuction());
+            builder.addAuctioneer(auctioneer);
+
+            return builder.getResult();
+        }
+
+        private static Auction buildOwnAuction(String auctionType)
+        {
+            IAuctionBuilder builder = auctionType switch
+            {
+                "SW" => new ConcreteAuctionBuilderSW(),
+                "BW" => new ConcreteAuctionBuilderBW(),
+                _ => new ConcreteAuctionBuilderO(),
+            };
+
+            var amountOfBuyers = askAmountOfBuyers();
+            var amountOfObjects = askAmountOfObjects();
+
+            addChosenBuyers(builder, amountOfBuyers);
+            addChosenObjectsOfSale(builder, amountOfObjects);
+            addOwnObjectOfSale(builder, auctionType);
+
+            var auctioneer = new Auctioneer(new StartAuction());
+            builder.addAuctioneer(auctioneer);
+
+            return builder.getResult();
+        }
+
+        private static void addChosenBuyers(IAuctionBuilder builder, int amountOfBuyers)
+        {
             Random random = new Random();
             for (int i = 1; i <= amountOfBuyers; i++) //adds  amount of buyers to the auction
             {
                 var wallet = 10000 + (random.NextDouble() * (100000 - 10000)); //add random amount of money to wallet between 10.000 and 100.000
                 builder.addBuyer(new ConcreteBuyer(i, wallet)); //adds buyer to auction
             }
+        }
 
+        private static void addChosenObjectsOfSale(IAuctionBuilder builder, int amountOfObjects)
+        {
+            Random random = new Random();
             int[] fordMeasurments = new int[3] { 200, 150, 140 };
             int[] yamahaMeasurments = new int[3] { 200, 150, 140 };
             int[] suzukiMeasurments = new int[3] { 200, 150, 140 };
@@ -148,27 +185,11 @@ namespace Veiling
                 };
                 builder.addObjectOfSale(objectToSell);
             }
-            //todo staat nog buyers in, maar tijdens call uit constructor verwijderd
-            var auctioneer = new Auctioneer(new StartAuction());
-
-            builder.addAuctioneer(auctioneer);
-
-            return builder.getResult();
         }
 
-        private static void buildOwnAuction(String auctionType)
+        private static void addOwnObjectOfSale(IAuctionBuilder builder, String auctionType)
         {
-            IAuctionBuilder builder = auctionType switch
-            {
-                "SW" => new ConcreteAuctionBuilderSW(),
-                "BW" => new ConcreteAuctionBuilderBW(),
-                _ => new ConcreteAuctionBuilderO(),
-            };
-
-            var amountOfBuyers = askAmountOfBuyers();
-            var amountOfObjects = askAmountOfObjects();
-
-            Console.WriteLine("Would you like to add an object that will be sold at this auction?\n [yes] Add an object to the list\n [no] Do not add an object to the list.");
+            Console.WriteLine("Would you like to add an(other) object that will be sold at this auction?\n [yes] Add an object to the list\n [no] Do not add an object to the list.");
             var answer = Console.ReadLine();
 
             if (answer == "yes")
@@ -185,7 +206,46 @@ namespace Veiling
                         Console.WriteLine("The online auction allows for objects to be sold no matter their dimensions.");
                         break;
                 }
+
+                var createdObject = askObjectToAdd();
+                builder.addObjectOfSale(createdObject);
+                addOwnObjectOfSale(builder, auctionType);
             }
+        }
+
+        private static ObjectOfSale askObjectToAdd()
+        {
+            Console.WriteLine("What for object do you want to add to the list of objects that will be sold at this auction?");
+            Console.WriteLine("You can pick between:\n [1] Car\n [2] Ship\n [3] Motorcycle\n [4] Gameconsole\n [5] Smartphone\n [6] Television\n [7] Computer\n [8] Headphones");
+
+            var chosenObject = checkChosenObjectOfSale();
+            Console.WriteLine("Please specify the brand of your {0}", chosenObject);
+            var brand = Console.ReadLine();
+
+            var estimatedValue = checkEstimatedValueOfOOS();
+            Console.WriteLine("Your given estimated value is {0}", estimatedValue);
+
+            var chosenObjectMeasurements = checkChosenOOSMeasurements();
+
+            var createdObject = createChosenObject(chosenObject, brand, chosenObjectMeasurements, estimatedValue);
+            return createdObject;
+        }
+
+        private static ObjectOfSale createChosenObject(String chosenObject, String brand, int[] measurements, double estimatedValue)
+        {
+            ObjectOfSale objectOfSale = chosenObject switch
+            {
+                "car" => new Car(brand, measurements, estimatedValue),
+                "ship" => new Ship(brand, measurements, estimatedValue),
+                "motercycle" => new Motorcycle(brand, measurements, estimatedValue),
+                "gameconsole" => new GameConsole(brand, measurements, estimatedValue),
+                "smartphone" => new Smartphone(brand, measurements, estimatedValue),
+                "television" => new Television(brand, measurements, estimatedValue),
+                "computer" => new Computer(brand, measurements, estimatedValue),
+                _ => new Headphone(brand, measurements, estimatedValue),
+            };
+
+            return objectOfSale;
         }
 
         private static int askAmountOfBuyers()
@@ -248,6 +308,124 @@ namespace Veiling
             while (amountOfObjects > 30);
 
             return amountOfObjects;
+        }
+
+        private static double checkEstimatedValueOfOOS()
+        {
+            double estimatedValue;
+
+            do
+            {
+                Console.WriteLine("Please fill in the price you estimate your object is worth.");
+                Console.WriteLine("The price can be 2 digits after the dot. For example: 1,23. 0 is not allowed.");
+                Console.WriteLine("When filling in cents, make sure to use a ',' (comma) and not a '.' (dot)");
+
+                var input = Console.ReadLine();
+
+                if (!double.TryParse(input, out estimatedValue))
+                    Console.WriteLine("Sorry, the given input is not a number. Please try again.");
+            }
+            while (estimatedValue == 0);
+
+            return estimatedValue;
+        }
+
+        private static String checkChosenObjectOfSale()
+        {
+            String chosenObject = null;
+
+            do
+            {
+                var input = Console.ReadLine().ToLower();
+
+                switch (input)
+                {
+                    case "1":
+                    case "car":
+                        chosenObject = "car";
+                        break;
+                    case "2":
+                    case "ship":
+                        chosenObject = "ship";
+                        break;
+                    case "3":
+                    case "motercycle":
+                        chosenObject = "motercycle";
+                        break;
+                    case "4":
+                    case "gameconsole":
+                        chosenObject = "gameconsole";
+                        break;
+                    case "5":
+                    case "smartphone":
+                        chosenObject = "smartphone";
+                        break;
+                    case "6":
+                    case "television":
+                        chosenObject = "television";
+                        break;
+                    case "7":
+                    case "computer":
+                        chosenObject = "computer";
+                        break;
+                    case "8":
+                    case "headphones":
+                        chosenObject = "headphones";
+                        break;
+                    default:
+                        Console.WriteLine("The input is not an option. Please select a correct option.");
+                        Console.WriteLine("You can pick between:\n [1] Car\n [2] Ship\n [3] Motorcycle\n [4] Gameconsole\n [5] Smartphone\n [6] Television\n [7] Computer\n [8] Headphones");
+                        checkChosenObjectOfSale();
+                        break;
+                }
+            }
+            while (null == chosenObject);
+
+            return chosenObject;
+        }
+
+        private static int[] checkChosenOOSMeasurements()
+        {
+            int length, width, height;
+            int[] measurements = new int[3];
+
+            do
+            {
+                Console.WriteLine("Please fill in de width of your chosen object in centimeters.");
+                var input = Console.ReadLine();
+
+                if (!int.TryParse(input, out width))
+                    Console.WriteLine("Sorry, the given input is not a number. Please try again.");
+            }
+            while (width == 0);
+
+            do
+            {
+                Console.WriteLine("Please fill in de height of your chosen object in centimeters.");
+                var input = Console.ReadLine();
+
+                if (!int.TryParse(input, out height))
+                    Console.WriteLine("Sorry, the given input is not a number. Please try again.");
+            }
+            while (height == 0);
+
+            do
+            {
+                Console.WriteLine("Please fill in de length of your chosen object in centimeters.");
+                var input = Console.ReadLine();
+
+                if (!int.TryParse(input, out length))
+                    Console.WriteLine("Sorry, the given input is not a number. Please try again.");
+            }
+            while (length == 0);
+
+            measurements[0] = width;
+            measurements[1] = height;
+            measurements[2] = length;
+
+            Console.WriteLine("width: {0}, height: {1}, length: {2}", measurements[0], measurements[1], measurements[2]);
+
+            return measurements;
         }
     }
 }
