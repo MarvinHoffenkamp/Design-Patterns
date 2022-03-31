@@ -68,5 +68,11 @@ namespace Veiling
         {
             return this.auctionType;
         }
+
+        public void moveObjectOfSale()
+        {
+            auctioneer.setObjectOfSale(objectsOfSale[0]);
+            objectsOfSale.RemoveAt(0);
+        }
     }
 }

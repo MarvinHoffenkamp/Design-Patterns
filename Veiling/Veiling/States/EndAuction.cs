@@ -7,15 +7,25 @@ namespace Veiling.States
 {
     class EndAuction : State
     {
-        public override void moveObjectOfSale(ObjectOfSale objectOfSale)
+        //todo find out highest bid and move object to there
+        public override void moveObjectOfSale()
         {
+            var highestbid = auctioneer.getCurrentBid();
+            foreach(Buyer buyer in auctioneer.getBuyers())
+            {
+                if(buyer.getDoneBid() == highestbid)
+                {
+                    buyer.addBoughtObject(auctioneer.getObjectOfSale());
+                    break;
+                }
+            }
             Console.WriteLine("object moved!");
         }
 
         public override void setAuctionState(State state)
         {
-            Console.WriteLine("auction state set!");
             this.auctioneer.TransitionTo(state);
+            Console.WriteLine("auction state set!");
         }
     }
 }

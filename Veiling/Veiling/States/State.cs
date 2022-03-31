@@ -13,7 +13,7 @@ namespace Veiling.States
         {
             this.auctioneer = auctioneer;
         }
-        public abstract void moveObjectOfSale(ObjectOfSale objectOfSale);
+        public abstract void moveObjectOfSale();
         public abstract void setAuctionState(State state);
     }
 }

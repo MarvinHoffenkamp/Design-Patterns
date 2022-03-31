@@ -12,16 +12,25 @@ namespace Veiling
          * TODO: methods nu void, graag veranderen naar juiste return types wanneer mogelijk
          */
         private State state = null;
+        private ObjectOfSale objectOfSale;
         private double currentBid;
         private double lastBid;
         private List<Buyer> buyers;
+        private Auction auction;
 
         public Auctioneer(State state)
         {
             this.TransitionTo(state);
             this.currentBid = 0.00;
             this.lastBid = 0.00;
-            this.buyers = new List<buyers>;
+            this.buyers = new List<Buyer>();
+            this.objectOfSale = null;
+            this.auction = null;
+        }
+
+        public void setAuction(Auction auction)
+        {
+            this.auction = auction;
         }
 
         public double getCurrentBid()
@@ -32,6 +41,16 @@ namespace Veiling
         public void setCurrentBid(double newCurrentBid)
         {
             currentBid = newCurrentBid;
+        }
+
+        public void setObjectOfSale(ObjectOfSale objectOfSale)
+        {
+            this.objectOfSale = objectOfSale;
+        }
+
+        public void setObjectsOfSale(List<ObjectOfSale> ObjectsOfSale)
+        {
+            this.auction.setObjectsOfSale(ObjectsOfSale);
         }
 
         public List<Buyer> getBuyers()
@@ -59,18 +78,44 @@ namespace Veiling
         public void TransitionTo(State state)
         {
             Console.WriteLine("changing state to {0}", state.GetType().Name);
-            this.state = state;
+            //get current state, then check
+            if(this.state.GetType().Name == "StartAuction")
+            {
+              if(state.GetType().Name == "AuctionInProgress"){
+                    this.state = state;
+                }
+            } else if (this.state.GetType().Name == "AuctionInProgress")
+            {
+                if(state.GetType().Name == "EndAuction")
+                {
+                    this.state = state;
+                }
+            } else if (state.GetType().Name == "StartAuction")
+            {
+                //assume state is EndAuction, hence only check if incoming state is StartAuction
+                this.state = state;
+            }
             this.state.setContext(this);
         }
 
         public void moveObjectOfSale(ObjectOfSale objectOfSale)
         {
-
+            
         }
 
         public void setAuctionState()
         {
 
+        }
+
+        public ObjectOfSale getObjectOfSale()
+        {
+            return this.objectOfSale;
+        }
+        
+        public Auction getAuction()
+        {
+            return auction;
         }
 
         public void joinAuction(Buyer joiningBuyer)

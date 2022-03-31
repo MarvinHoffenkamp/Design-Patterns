@@ -7,9 +7,11 @@ namespace Veiling.States
 {
     class AuctionInProgress : State
     {
-        public override void moveObjectOfSale(ObjectOfSale objectOfSale)
+        /*implement notify stuff TODO*/
+        public override void moveObjectOfSale()
         {
-            Console.WriteLine("object moved!");
+            this.auctioneer.notifyBuyers();
+            Console.WriteLine("nothing moved between switching states from start to inProgress!");
         }
 
         public override void setAuctionState(State state)

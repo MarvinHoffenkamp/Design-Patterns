@@ -148,8 +148,8 @@ namespace Veiling
                 };
                 builder.addObjectOfSale(objectToSell);
             }
-
-            var auctioneer = new Auctioneer(new StartAuction(), builder.getResult().getBuyers());
+            //todo staat nog buyers in, maar tijdens call uit constructor verwijderd
+            var auctioneer = new Auctioneer(new StartAuction());
 
             builder.addAuctioneer(auctioneer);
 
