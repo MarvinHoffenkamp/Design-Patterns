@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Veiling.ObjectsOfSale;
 
 namespace Veiling.States
 {
@@ -14,20 +11,20 @@ namespace Veiling.States
 
         public override void moveObjectOfSale()
         {
-            var OOS = this.auctioneer.getAuction().getObjectsOfSale();
+            var OOS = auctioneer.getAuction().getObjectsOfSale();
             var firstOOS = OOS[0];
             OOS.RemoveAt(0);
-            this.auctioneer.setObjectOfSale(firstOOS);
-            this.auctioneer.setObjectsOfSale(OOS);
+            auctioneer.setObjectOfSale(firstOOS);
+            auctioneer.setObjectsOfSale(OOS);
             Console.WriteLine("Object moved from auction");
         }
 
         public override void runState()
         {
             moveObjectOfSale();
-            this.auctioneer.setState(this);
-            this.auctioneer.setStartAuctionFinished(true);
-            Console.WriteLine("Changed state to {0}", this.GetType().Name);
+            auctioneer.setState(this);
+            auctioneer.setStartAuctionFinished(true);
+            Console.WriteLine("Changed state to {0}", GetType().Name);
         }
     }
 }

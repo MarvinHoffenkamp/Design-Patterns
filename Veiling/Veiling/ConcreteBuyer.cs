@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using Veiling.ObjectsOfSale;
 
 namespace Veiling
@@ -18,14 +16,13 @@ namespace Veiling
         {
             this.buyersNumber = buyersNumber;
             this.wallet = wallet;
-            this.boughtObjects = new List<ObjectOfSale>();
-            this.currentBid = 0.00;
-            this.buyersBid = 0.00;
+            boughtObjects = new List<ObjectOfSale>();
+            currentBid = 0.00;
+            buyersBid = 0.00;
         }
 
         public void bid(double price)
         {
-            //throw new NotImplementedException();
             setCurrentBid(price);
             doBid();
         }
@@ -42,7 +39,7 @@ namespace Veiling
 
         public int getBuyersNumber()
         {
-            return this.buyersNumber;
+            return buyersNumber;
         }
 
         public void setBuyersNumber(int newBuyersNumber)
@@ -52,7 +49,7 @@ namespace Veiling
 
         public double getWallet()
         {
-            return this.wallet;
+            return wallet;
         }
 
         public void setWallet(double newWallet)
@@ -62,7 +59,7 @@ namespace Veiling
 
         public List<ObjectOfSale> GetBoughtObjects()
         {
-            return this.boughtObjects;
+            return boughtObjects;
         }
 
         public void addBoughtObject(ObjectOfSale newBoughtObject)
@@ -77,7 +74,7 @@ namespace Veiling
 
         public double getCurrentBid()
         {
-            return this.currentBid;
+            return currentBid;
         }
 
         public void setCurrentBid(double newCurrentBid)
@@ -87,7 +84,7 @@ namespace Veiling
 
         public double getDoneBid()
         {
-            return this.buyersBid;
+            return buyersBid;
         }
 
         public void setDoneBid(double newDoneBid)
@@ -102,7 +99,7 @@ namespace Veiling
 
         public Auctioneer getAuctioneer()
         {
-            return this.auctioneer;
+            return auctioneer;
         }
     }
 }

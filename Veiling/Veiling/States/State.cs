@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Veiling.ObjectsOfSale;
-
-namespace Veiling.States
+﻿namespace Veiling.States
 {
     abstract class State
     {
