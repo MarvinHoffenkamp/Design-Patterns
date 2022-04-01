@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Timers;
 using Veiling.ObjectsOfSale;
 using Veiling.States;
 
@@ -8,16 +7,12 @@ namespace Veiling
 {
     class Auctioneer
     {
-        /*
-         * TODO: methods nu void, graag veranderen naar juiste return types wanneer mogelijk
-         */
         private State state;
         private ObjectOfSale objectOfSale;
         private double currentBid;
-        private double lastBid;
         private List<IBuyer> buyers;
         private Auction auction;
-        private bool startAuctinoFinished;
+        private bool startAuctionFinished;
         private bool auctionInProgressFinished;
         private bool endAuctionFinished;
         private double startBidPercentage;
@@ -26,11 +21,10 @@ namespace Veiling
         public Auctioneer()
         {
             this.currentBid = 0.00;
-            this.lastBid = 0.00;
             this.buyers = new List<IBuyer>();
             this.objectOfSale = null;
             this.auction = null;
-            this.startAuctinoFinished = false;
+            this.startAuctionFinished = false;
             this.auctionInProgressFinished = false;
             this.endAuctionFinished = false;
             this.state = null;
@@ -44,21 +38,23 @@ namespace Veiling
 
         public double getCurrentBid()
         {
-            return this.currentBid;
+            return currentBid;
         }
 
         public void getMoney()
         {
-            var highestbid = getCurrentBid();
+            double highestbid = getCurrentBid();
+            double subtractedAmount = 0;
             foreach (IBuyer buyer in getBuyers())
             {
                 if (buyer.getBuyersBid() == highestbid)
                 {
-                    buyer.setWallet(buyer.getWallet() - highestbid);
+                    subtractedAmount = buyer.getWallet() - highestbid;
+                    buyer.setWallet(subtractedAmount);
                     break;
                 }
             }
-            Console.WriteLine("Wallet subtracted!");
+            Console.WriteLine("Subtracted {0} from the wallet.", subtractedAmount);
         }
 
         public void setCurrentBid(double newCurrentBid)
@@ -106,34 +102,7 @@ namespace Veiling
         public void TransitionTo(State state)
         {
             Console.WriteLine("Changing state to {0}", state.GetType().Name);
-            //get current state, then check
-            if (this.state == null)
-            {
-                state.runState();
-            }
-            else if (this.state.GetType().Name == "StartAuction")
-            {
-                if (state.GetType().Name == "AuctionInProgress")
-                {
-                    state.runState();
-                }
-            }
-            else if (this.state.GetType().Name == "AuctionInProgress")
-            {
-                if (state.GetType().Name == "EndAuction")
-                {
-                    state.runState();
-                }
-            }
-            else if (state.GetType().Name == "StartAuction")
-            {
-                state.runState();
-            }
-            else if (this.state.GetType().Name == "EndAuction")
-            {
-                this.state = null;
-                Console.WriteLine("Changed state to idle");
-            }
+            state.runState();
         }
 
         public State getState()
@@ -195,24 +164,14 @@ namespace Veiling
             }
         }
 
-        public double getLastBid()
-        {
-            return lastBid;
-        }
-
-        public void setLastBid(double lastBid)
-        {
-            this.lastBid = lastBid;
-        }
-
         public bool getStartAuctionFinished()
         {
-            return startAuctinoFinished;
+            return startAuctionFinished;
         }
 
         public void setStartAuctionFinished(bool finished)
         {
-            startAuctinoFinished = finished;
+            startAuctionFinished = finished;
         }
 
         public bool getAuctionInProgressFinished()
