@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Text;
 using System.Timers;
 using Veiling.ObjectsOfSale;
 using Veiling.States;
@@ -50,8 +48,8 @@ namespace Veiling
 
         public void getMoney()
         {
-            var highestbid = this.getCurrentBid();
-            foreach (IBuyer buyer in this.getBuyers())
+            var highestbid = getCurrentBid();
+            foreach (IBuyer buyer in getBuyers())
             {
                 if (buyer.getDoneBid() == highestbid)
                 {
@@ -69,7 +67,7 @@ namespace Veiling
 
         public ObjectOfSale getObjectOfSale()
         {
-            return this.objectOfSale;
+            return objectOfSale;
         }
 
         public void setObjectOfSale(ObjectOfSale objectOfSale)
@@ -79,18 +77,18 @@ namespace Veiling
 
         public void setObjectsOfSale(List<ObjectOfSale> ObjectsOfSale)
         {
-            this.auction.setObjectsOfSale(ObjectsOfSale);
+            auction.setObjectsOfSale(ObjectsOfSale);
         }
 
         public List<IBuyer> getBuyers()
         {
-            return this.buyers;
+            return buyers;
         }
 
         public void addBuyer(IBuyer buyer)
         {
             buyer.setAuctioneer(this);
-            this.buyers.Add(buyer);
+            buyers.Add(buyer);
         }
 
         public void setBuyers(List<IBuyer> newBuyers)
@@ -139,17 +137,17 @@ namespace Veiling
 
         public State getState()
         {
-            return this.state;
+            return state;
         }
 
         public void setState(State newState)
         {
-            this.state = newState;
+            state = newState;
         }
         
         public Auction getAuction()
         {
-            return this.auction;
+            return auction;
         }
 
         public void joinAuction(IBuyer joiningBuyer)
@@ -195,7 +193,7 @@ namespace Veiling
 
         public double getLastBid()
         {
-            return this.lastBid;
+            return lastBid;
         }
 
         public void setLastBid(double lastBid)
@@ -205,36 +203,36 @@ namespace Veiling
 
         public bool getStartAuctionFinished()
         {
-            return this.startAuctinoFinished;
+            return startAuctinoFinished;
         }
 
         public void setStartAuctionFinished(bool finished)
         {
-            this.startAuctinoFinished = finished;
+            startAuctinoFinished = finished;
         }
 
         public bool getAuctionInProgressFinished()
         {
-            return this.auctionInProgressFinished;
+            return auctionInProgressFinished;
         }
 
         public void setAuctionInProgressFinished(bool finished)
         {
-            this.auctionInProgressFinished = finished;
+            auctionInProgressFinished = finished;
         }
 
         public bool getEndAuctionFinished()
         {
-            return this.endAuctionFinished;
+            return endAuctionFinished;
         }
         public void setEndAuctionFinished(bool finished)
         {
-            this.endAuctionFinished = finished;
+            endAuctionFinished = finished;
         }
 
         public int getStartBidPercentage()
         {
-            return this.startBidPercentage;
+            return startBidPercentage;
         }
 
         public int generateStartBidPercentage()

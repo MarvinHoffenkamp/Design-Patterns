@@ -159,7 +159,6 @@ namespace Veiling
 
             addChosenBuyers(builder, amountOfBuyers);
             addChosenObjectsOfSale(builder, amountOfObjects);
-            addOwnObjectOfSale(builder, auctionType);
 
             Auctioneer auctioneer = new Auctioneer();
             builder.addAuctioneer(auctioneer);
