@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
+using System.Timers;
 using Veiling.ObjectsOfSale;
 using Veiling.States;
 
@@ -20,6 +22,7 @@ namespace Veiling
         private bool startAuctinoFinished;
         private bool auctionInProgressFinished;
         private bool endAuctionFinished;
+        private int startBidPercentage;
 
         public Auctioneer()
         {
@@ -32,6 +35,7 @@ namespace Veiling
             this.auctionInProgressFinished = false;
             this.endAuctionFinished = false;
             this.state = null;
+            this.startBidPercentage = generateStartBidPercentage();
         }
 
         public void setAuction(Auction auction)
@@ -164,12 +168,38 @@ namespace Veiling
             {
                 buyer.bid(getCurrentBid());
             }
+
+            Console.WriteLine("The current bid is: {0}", getCurrentBid());
         }
 
         public void notifiedByBuyer(double bid)
         {
             setCurrentBid(bid);
             notifyBuyers();
+
+            Timer lastBidCheckTimer = new Timer();
+            lastBidCheckTimer.Elapsed += new ElapsedEventHandler(lastBidCheck);
+            lastBidCheckTimer.Interval = 30000;
+            lastBidCheckTimer.Enabled = true;
+        }
+
+        private void lastBidCheck(object source, ElapsedEventArgs e)
+        {
+            if (lastBid == getCurrentBid())
+            {
+                Console.WriteLine("Sold!");
+                setAuctionInProgressFinished(true);
+            }
+        }
+
+        public double getLastBid()
+        {
+            return this.lastBid;
+        }
+
+        public void setLastBid(double lastBid)
+        {
+            this.lastBid = lastBid;
         }
 
         public bool getStartAuctionFinished()
@@ -199,6 +229,18 @@ namespace Veiling
         public void setEndAuctionFinished(bool finished)
         {
             this.endAuctionFinished = finished;
+        }
+
+        public int getStartBidPercentage()
+        {
+            return this.startBidPercentage;
+        }
+
+        public int generateStartBidPercentage()
+        {
+            //Start bid can be between 10 - 70% of the estemated value
+            Random startBidPercentage = new Random();
+            return startBidPercentage.Next(10, 70);
         }
     }
 }
