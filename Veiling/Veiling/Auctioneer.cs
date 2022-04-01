@@ -51,7 +51,7 @@ namespace Veiling
         public void getMoney()
         {
             var highestbid = this.getCurrentBid();
-            foreach (Buyer buyer in this.getBuyers())
+            foreach (IBuyer buyer in this.getBuyers())
             {
                 if (buyer.getDoneBid() == highestbid)
                 {
@@ -188,6 +188,7 @@ namespace Veiling
             if (lastBid == getCurrentBid())
             {
                 Console.WriteLine("Sold!");
+                getMoney();
                 setAuctionInProgressFinished(true);
             }
         }
