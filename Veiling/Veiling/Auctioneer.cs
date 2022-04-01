@@ -38,6 +38,20 @@ namespace Veiling
             return this.currentBid;
         }
 
+        public void getMoney()
+        {
+            var highestbid = this.getCurrentBid();
+            foreach (Buyer buyer in this.getBuyers())
+            {
+                if (buyer.getDoneBid() == highestbid)
+                {
+                    buyer.setWallet(buyer.getWallet() - highestbid);
+                    break;
+                }
+            }
+            Console.WriteLine("Wallet subtracted!");
+        }
+
         public void setCurrentBid(double newCurrentBid)
         {
             currentBid = newCurrentBid;

@@ -13,5 +13,7 @@ namespace Veiling
         void setAuctioneer(Auctioneer auctioneer);
         double getDoneBid();
         void addBoughtObject(ObjectOfSale newBoughtObject);
+        double getWallet();
+        void setWallet(double newWallet);
     }
 }
