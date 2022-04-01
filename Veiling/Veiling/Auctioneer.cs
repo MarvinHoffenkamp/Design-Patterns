@@ -11,21 +11,27 @@ namespace Veiling
         /*
          * TODO: methods nu void, graag veranderen naar juiste return types wanneer mogelijk
          */
-        private State state = null;
+        private State state;
         private ObjectOfSale objectOfSale;
         private double currentBid;
         private double lastBid;
-        private List<Buyer> buyers;
+        private List<IBuyer> buyers;
         private Auction auction;
+        private bool startAuctinoFinished;
+        private bool auctionInProgressFinished;
+        private bool endAuctionFinished;
 
-        public Auctioneer(State state)
+        public Auctioneer()
         {
-            this.TransitionTo(state);
             this.currentBid = 0.00;
             this.lastBid = 0.00;
-            this.buyers = new List<Buyer>();
+            this.buyers = new List<IBuyer>();
             this.objectOfSale = null;
             this.auction = null;
+            this.startAuctinoFinished = false;
+            this.auctionInProgressFinished = false;
+            this.endAuctionFinished = false;
+            this.state = null;
         }
 
         public void setAuction(Auction auction)
@@ -57,6 +63,11 @@ namespace Veiling
             currentBid = newCurrentBid;
         }
 
+        public ObjectOfSale getObjectOfSale()
+        {
+            return this.objectOfSale;
+        }
+
         public void setObjectOfSale(ObjectOfSale objectOfSale)
         {
             this.objectOfSale = objectOfSale;
@@ -67,21 +78,21 @@ namespace Veiling
             this.auction.setObjectsOfSale(ObjectsOfSale);
         }
 
-        public List<Buyer> getBuyers()
+        public List<IBuyer> getBuyers()
         {
             return this.buyers;
         }
 
-        public void addBuyer(Buyer buyer)
+        public void addBuyer(IBuyer buyer)
         {
             buyer.setAuctioneer(this);
             this.buyers.Add(buyer);
         }
 
-        public void setBuyers(List<Buyer> newBuyers)
+        public void setBuyers(List<IBuyer> newBuyers)
         {
-            List<Buyer> buyersWithAuctioneer = new List<Buyer>();
-            foreach (Buyer buyer in buyers)
+            List<IBuyer> buyersWithAuctioneer = new List<IBuyer>();
+            foreach (IBuyer buyer in buyers)
             {
                 buyer.setAuctioneer(this);
                 buyersWithAuctioneer.Add(buyer);
@@ -95,72 +106,61 @@ namespace Veiling
             //get current state, then check
             if (this.state == null)
             {
-                this.state = state;
-                Console.WriteLine("Changed state to {0}", this.state.GetType().Name);
+                state.runState();
             }
             else if (this.state.GetType().Name == "StartAuction")
             {
                 if (state.GetType().Name == "AuctionInProgress")
                 {
-                    this.state = state;
-                    Console.WriteLine("Changed state to {0}", this.state.GetType().Name);
+                    state.runState();
                 }
             }
             else if (this.state.GetType().Name == "AuctionInProgress")
             {
                 if (state.GetType().Name == "EndAuction")
                 {
-                    this.state = state;
-                    Console.WriteLine("Changed state to {0}", this.state.GetType().Name);
+                    state.runState();
                 }
             }
             else if (state.GetType().Name == "StartAuction")
             {
-                //assume state is EndAuction, hence only check if incoming state is StartAuction
-                this.state = state;
-                Console.WriteLine("Changed state to {0}", this.state.GetType().Name);
+                state.runState();
             }
             else if (this.state.GetType().Name == "EndAuction")
             {
                 this.state = null;
-                Console.WriteLine("Changed state to {0}", this.state.GetType().Name);
+                Console.WriteLine("Changed state to idle");
             }
-            this.state.setContext(this);
         }
 
-        public void moveObjectOfSale(ObjectOfSale objectOfSale)
+        public State getState()
         {
-            
+            return this.state;
         }
 
-        public void setAuctionState()
+        public void setState(State newState)
         {
-
-        }
-
-        public ObjectOfSale getObjectOfSale()
-        {
-            return this.objectOfSale;
+            this.state = newState;
         }
         
         public Auction getAuction()
         {
-            return auction;
+            return this.auction;
         }
 
-        public void joinAuction(Buyer joiningBuyer)
+        public void joinAuction(IBuyer joiningBuyer)
         {
             addBuyer(joiningBuyer);
         }
 
-        public void leaveAuction(Buyer leavingBuyer)
+        public void leaveAuction(IBuyer leavingBuyer)
         {
             getBuyers().Remove(leavingBuyer);
         }
 
         public void notifyBuyers()
         {
-            foreach (Buyer buyer in getBuyers())
+            foreach (IBuyer buyer in getBuyers())
             {
                 buyer.bid(getCurrentBid());
             }
@@ -170,6 +170,35 @@ namespace Veiling
         {
             setCurrentBid(bid);
             notifyBuyers();
+        }
+
+        public bool getStartAuctionFinished()
+        {
+            return this.startAuctinoFinished;
+        }
+
+        public void setStartAuctionFinished(bool finished)
+        {
+            this.startAuctinoFinished = finished;
+        }
+
+        public bool getAuctionInProgressFinished()
+        {
+            return this.auctionInProgressFinished;
+        }
+
+        public void setAuctionInProgressFinished(bool finished)
+        {
+            this.auctionInProgressFinished = finished;
+        }
+
+        public bool getEndAuctionFinished()
+        {
+            return this.endAuctionFinished;
+        }
+        public void setEndAuctionFinished(bool finished)
+        {
+            this.endAuctionFinished = finished;
         }
     }
 }

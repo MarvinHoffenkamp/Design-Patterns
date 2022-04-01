@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Veiling.ObjectsOfSale;
+﻿using Veiling.ObjectsOfSale;
 
 namespace Veiling.Auctions
 {
@@ -9,7 +6,7 @@ namespace Veiling.Auctions
     {
         void reset();
         void addAuctioneer(Auctioneer auctioneer);
-        void addBuyer(Buyer buyer);
+        void addBuyer(IBuyer buyer);
         void addObjectOfSale(ObjectOfSale objectsOfSale);
         Auction getResult();
     }

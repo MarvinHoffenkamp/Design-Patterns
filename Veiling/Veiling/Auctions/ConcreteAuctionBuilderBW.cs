@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Veiling.ObjectsOfSale;
 
 namespace Veiling.Auctions
@@ -11,18 +9,18 @@ namespace Veiling.Auctions
 
         public ConcreteAuctionBuilderBW()
         {
-            this.result = new Auction();
-            this.setAuctionType();
+            result = new Auction();
+            setAuctionType();
         }
 
         public void addAuctioneer(Auctioneer auctioneer)
         {
-            this.result.setAuctioneer(auctioneer);
+            result.setAuctioneer(auctioneer);
         }
 
-        public void addBuyer(Buyer buyer)
+        public void addBuyer(IBuyer buyer)
         {
-            this.result.addBuyer(buyer);
+            result.addBuyer(buyer);
             Console.WriteLine("Buyer with number {0} started walking around the auction.", buyer.getBuyersNumber());
         }
 
@@ -40,23 +38,23 @@ namespace Veiling.Auctions
                 return;
             }
 
-            this.result.addObjectOfSale(objectOfSale);
+            result.addObjectOfSale(objectOfSale);
             Console.WriteLine("Added {0} {1} to the auction list.", objectOfSale.getBrand(), objectOfSale.GetType().Name);
         }
 
         public void reset()
         {
-            this.result = new Auction();
+            result = new Auction();
         }
 
         public Auction getResult()
         {
-            return this.result;
+            return result;
         }
 
         private void setAuctionType()
         {
-            this.result.setAuctionType("Big warehouse auction");
+            result.setAuctionType("Big warehouse auction");
         }
     }
 }

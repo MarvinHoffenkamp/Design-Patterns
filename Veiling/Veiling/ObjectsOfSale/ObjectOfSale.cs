@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Veiling.ObjectsOfSale
 {
@@ -20,7 +18,7 @@ namespace Veiling.ObjectsOfSale
 
         public String getBrand()
         {
-            return this.brand;
+            return brand;
         }
 
         public void setBrand(String newBrand)
@@ -30,7 +28,7 @@ namespace Veiling.ObjectsOfSale
 
         public int[] getMeasurements()
         {
-            return this.measurements;
+            return measurements;
         }
 
         public void setMeasurements(int[] newMeasurements)
@@ -45,7 +43,7 @@ namespace Veiling.ObjectsOfSale
 
         public double getEstimatedValue()
         {
-            return this.estimatedValue;
+            return estimatedValue;
         }
 
         public void setEstimatedValue(double newEstimatedValue)

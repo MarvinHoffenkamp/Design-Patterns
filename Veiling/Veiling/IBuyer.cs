@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Veiling.ObjectsOfSale;
+﻿using Veiling.ObjectsOfSale;
 
 namespace Veiling
 {
-    interface Buyer
+    interface IBuyer
     {
         void bid(double price);
         void doBid();

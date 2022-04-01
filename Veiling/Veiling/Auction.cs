@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Veiling.Auctions;
+﻿using System.Collections.Generic;
 using Veiling.ObjectsOfSale;
 
 namespace Veiling
@@ -10,13 +7,13 @@ namespace Veiling
     {
         private Auctioneer auctioneer;
         private List<ObjectOfSale> objectsOfSale;
-        private List<Buyer> buyers;
+        private List<IBuyer> buyers;
         private string auctionType;
 
         public Auction()
         {
             this.objectsOfSale = new List<ObjectOfSale>();
-            this.buyers = new List<Buyer>();
+            this.buyers = new List<IBuyer>();
         }
 
         public void setAuctioneer(Auctioneer auctioneer)
@@ -26,7 +23,7 @@ namespace Veiling
 
         public Auctioneer getAuctioneer()
         {
-            return this.auctioneer;
+            return auctioneer;
         }
 
         public void setObjectsOfSale(List<ObjectOfSale> objectsOfSale)
@@ -36,37 +33,37 @@ namespace Veiling
 
         public List<ObjectOfSale> getObjectsOfSale()
         {
-            return this.objectsOfSale;
+            return objectsOfSale;
         }
 
         public void addObjectOfSale(ObjectOfSale objectOfSale)
         {
-            this.objectsOfSale.Add(objectOfSale);
+            objectsOfSale.Add(objectOfSale);
         }
 
-        public void setBuyers(List<Buyer> buyers)
+        public void setBuyers(List<IBuyer> buyers)
         {
             this.buyers = buyers;
         }
 
-        public List<Buyer> getBuyers()
+        public List<IBuyer> getBuyers()
         {
-            return this.buyers;
+            return buyers;
         }
 
-        public void addBuyer(Buyer buyer)
+        public void addBuyer(IBuyer buyer)
         {
-            this.buyers.Add(buyer);
+            buyers.Add(buyer);
         }
 
         public void setAuctionType(string type)
         {
-            this.auctionType = type;
+            auctionType = type;
         }
 
         public string getAuctionType()
         {
-            return this.auctionType;
+            return auctionType;
         }
 
         public void moveObjectOfSale()

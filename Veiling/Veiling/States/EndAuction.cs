@@ -1,17 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Veiling.ObjectsOfSale;
 
 namespace Veiling.States
 {
     class EndAuction : State
     {
+        public EndAuction(Auctioneer auctioneer) : base(auctioneer)
+        {
+
+        }
+
         //todo find out highest bid and move object to there
         public override void moveObjectOfSale()
         {
             var highestbid = auctioneer.getCurrentBid();
-            foreach(Buyer buyer in auctioneer.getBuyers())
+            foreach(IBuyer buyer in auctioneer.getBuyers())
             {
                 if(buyer.getDoneBid() == highestbid)
                 {
@@ -19,13 +21,15 @@ namespace Veiling.States
                     break;
                 }
             }
-            Console.WriteLine("object moved!");
+            Console.WriteLine("Object moved to buyer");
         }
 
-        public override void setAuctionState(State state)
+        public override void runState()
         {
-            this.auctioneer.TransitionTo(state);
-            Console.WriteLine("auction state set!");
+            moveObjectOfSale();
+            auctioneer.setState(this);
+            auctioneer.setStartAuctionFinished(true);
+            Console.WriteLine("Changed state to {0}", GetType().Name);
         }
     }
 }

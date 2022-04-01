@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Veiling.ObjectsOfSale
+﻿namespace Veiling.ObjectsOfSale
 {
     class TestHeadphone : IObjectTest
     {

@@ -1,25 +1,30 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Veiling.ObjectsOfSale;
 
 namespace Veiling.States
 {
     class StartAuction : State
     {
-        public override void moveObjectOfSale()
+        public StartAuction(Auctioneer auctioneer) : base(auctioneer)
         {
-            var OOS = this.auctioneer.getAuction().getObjectsOfSale();
-            var firstOOS = OOS[0];
-            OOS.RemoveAt(0);
-            this.auctioneer.setObjectOfSale(firstOOS);
-            this.auctioneer.setObjectsOfSale(OOS);
+            
         }
 
-        public override void setAuctionState(State state)
+        public override void moveObjectOfSale()
         {
-            Console.WriteLine("auction state set!");
-            this.auctioneer.TransitionTo(state);
+            var OOS = auctioneer.getAuction().getObjectsOfSale();
+            var firstOOS = OOS[0];
+            OOS.RemoveAt(0);
+            auctioneer.setObjectOfSale(firstOOS);
+            auctioneer.setObjectsOfSale(OOS);
+            Console.WriteLine("Object moved from auction");
+        }
+
+        public override void runState()
+        {
+            moveObjectOfSale();
+            auctioneer.setState(this);
+            auctioneer.setStartAuctionFinished(true);
+            Console.WriteLine("Changed state to {0}", GetType().Name);
         }
     }
 }

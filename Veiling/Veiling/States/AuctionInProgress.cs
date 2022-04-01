@@ -1,23 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Veiling.ObjectsOfSale;
 
 namespace Veiling.States
 {
     class AuctionInProgress : State
     {
+        public AuctionInProgress(Auctioneer auctioneer) : base(auctioneer)
+        {
+
+        }
+
         /*implement notify stuff TODO*/
         public override void moveObjectOfSale()
         {
-            this.auctioneer.notifyBuyers();
-            Console.WriteLine("nothing moved between switching states from start to inProgress!");
+            auctioneer.notifyBuyers();
+            Console.WriteLine("Auctioneer is keeping the auction in progress");
         }
 
-        public override void setAuctionState(State state)
+        public override void runState()
         {
-            Console.WriteLine("auction state set!");
-            this.auctioneer.TransitionTo(state);
+            moveObjectOfSale();
+            auctioneer.setState(this);
+            auctioneer.setStartAuctionFinished(true);
+            Console.WriteLine("Changed state to {0}", GetType().Name);
         }
     }
 }
