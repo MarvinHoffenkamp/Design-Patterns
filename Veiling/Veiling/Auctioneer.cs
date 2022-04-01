@@ -17,15 +17,20 @@ namespace Veiling
         private double lastBid;
         private List<Buyer> buyers;
         private Auction auction;
+        private bool startAuctinoFinished;
+        private bool auctionInProgressFinished;
+        private bool endAuctionFinished;
 
-        public Auctioneer(State state)
+        public Auctioneer()
         {
-            this.TransitionTo(state);
             this.currentBid = 0.00;
             this.lastBid = 0.00;
             this.buyers = new List<Buyer>();
             this.objectOfSale = null;
             this.auction = null;
+            this.startAuctinoFinished = false;
+            this.auctionInProgressFinished = false;
+            this.endAuctionFinished = false;
         }
 
         public void setAuction(Auction auction)
@@ -156,6 +161,35 @@ namespace Veiling
         {
             setCurrentBid(bid);
             notifyBuyers();
+        }
+
+        public bool getStartAuctionFinished()
+        {
+            return this.startAuctinoFinished;
+        }
+
+        public void setStartAuctionFinished(bool finished)
+        {
+            this.startAuctinoFinished = finished;
+        }
+
+        public bool getAuctionInProgressFinished()
+        {
+            return this.auctionInProgressFinished;
+        }
+
+        public void setAuctionInProgressFinished(bool finished)
+        {
+            this.auctionInProgressFinished = finished;
+        }
+
+        public bool getEndAuctionFinished()
+        {
+            return this.endAuctionFinished;
+        }
+        public void setEndAuctionFinished(bool finished)
+        {
+            this.endAuctionFinished = finished;
         }
     }
 }

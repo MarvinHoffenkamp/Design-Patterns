@@ -117,8 +117,9 @@ namespace Veiling
 
             addChosenBuyers(builder, amountOfBuyers);
             addChosenObjectsOfSale(builder, amountOfObjects);
-            
-            var auctioneer = new Auctioneer(new StartAuction());
+            addOwnObjectOfSale(builder, auctionType);
+
+            var auctioneer = new Auctioneer();
             builder.addAuctioneer(auctioneer);
 
             return builder.getResult();
@@ -140,7 +141,7 @@ namespace Veiling
             addChosenObjectsOfSale(builder, amountOfObjects);
             addOwnObjectOfSale(builder, auctionType);
 
-            var auctioneer = new Auctioneer(new StartAuction());
+            var auctioneer = new Auctioneer();
             builder.addAuctioneer(auctioneer);
 
             return builder.getResult();
