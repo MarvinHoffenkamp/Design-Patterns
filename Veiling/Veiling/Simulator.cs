@@ -25,16 +25,13 @@ namespace Veiling
                     simulateSmallWarehouse();
                     break;
                 case "2":
-                    //simulateBigWarehouse();
-                    Console.WriteLine("Not fully implemented yet.");
+                    simulateBigWarehouse();
                     break;
                 case "3":
-                    //simulateOnline();
-                    Console.WriteLine("Not fully implemented yet.");
+                    simulateOnline();
                     break;
                 case "4":
                     simulateOwnAuction();
-                    //Console.WriteLine("Not fully implemented yet.");
                     break;
                 default:
                     Console.WriteLine("Sorry, the chosen option does not exist. Please choose a correct option.");
@@ -47,16 +44,17 @@ namespace Veiling
 
         private static void chooseAuction(String chosenAuction)
         {
+            Auction auction = null;
             switch (chosenAuction)
             {
                 case "1":
-                    buildOwnAuction("SW");
+                    auction = buildOwnAuction("SW");
                     break;
                 case "2":
-                    buildOwnAuction("BW");
+                    auction = buildOwnAuction("BW");
                     break;
                 case "3":
-                    buildOwnAuction("O");
+                    auction = buildOwnAuction("O");
                     break;
                 default:
                     Console.WriteLine("Sorry, this option does not exist. Please select an option that does.");
@@ -64,6 +62,49 @@ namespace Veiling
                     var newChosenAuction = Console.ReadLine();
                     chooseAuction(newChosenAuction);
                     break;
+            }
+
+            if (auction == null)
+                return;
+
+            simulateBuildAuction(auction);
+        }
+
+        private static void simulateBuildAuction(Auction auction)
+        {
+            var auctioneer = auction.getAuctioneer();
+            var start = new StartAuction(auctioneer);
+            var inProgress = new AuctionInProgress(auctioneer);
+            var end = new EndAuction(auctioneer);
+
+            Console.WriteLine("Time to simulate the auction. Type of auction that will be simulated: {0}", auction.getAuctionType());
+
+            while (auction.getObjectsOfSale().Count != 0)
+            {
+                auctioneer.TransitionTo(start);
+                do
+                {
+                    //nothing, wait untill state specific code is finished
+                }
+                while (auctioneer.getStartAuctionFinished() != true);
+
+                auctioneer.TransitionTo(inProgress);
+                do
+                {
+                    //nothing, wait untill state specific code is finished
+                }
+                while (auctioneer.getAuctionInProgressFinished() != true);
+
+                auctioneer.TransitionTo(end);
+                do
+                {
+                    //nothing, wait untill state specific code is finished
+                }
+                while (auctioneer.getEndAuctionFinished() != true);
+
+                auctioneer.setStartAuctionFinished(false);
+                auctioneer.setAuctionInProgressFinished(false);
+                auctioneer.setEndAuctionFinished(false);
             }
         }
 
@@ -75,6 +116,7 @@ namespace Veiling
             var amountOfObjects = askAmountOfObjects();
 
             var auction = buildPredefinedAuction("SW", amountOfBuyers, amountOfObjects);
+            simulateBuildAuction(auction);
         }
 
         private static void simulateBigWarehouse()
@@ -85,6 +127,7 @@ namespace Veiling
             var amountOfObjects = askAmountOfObjects();
 
             var auction = buildPredefinedAuction("BW", amountOfBuyers, amountOfObjects);
+            simulateBuildAuction(auction);
         }
 
         private static void simulateOnline()
@@ -95,6 +138,7 @@ namespace Veiling
             var amountOfObjects = askAmountOfObjects();
 
             var auction = buildPredefinedAuction("O", amountOfBuyers, amountOfObjects);
+            simulateBuildAuction(auction);
         }
 
         private static void simulateOwnAuction()
@@ -186,6 +230,18 @@ namespace Veiling
                 };
                 builder.addObjectOfSale(objectToSell);
             }
+
+            if (builder.getResult().getObjectsOfSale().Count == 0)
+            {
+                Console.WriteLine("No random object added to list");
+                if (builder.getResult().getAuctionType() == "Big warehouse auction")
+                {
+                    builder.addObjectOfSale(new Car("Ford", fordMeasurments, 5000.00));
+                    return;
+                }
+
+                builder.addObjectOfSale(new GameConsole("Playstation 4", playstationMeasurements, 250.00));
+            }
         }
 
         private static void addOwnObjectOfSale(IAuctionBuilder builder, String auctionType)
@@ -238,7 +294,7 @@ namespace Veiling
             {
                 "car" => new Car(brand, measurements, estimatedValue),
                 "ship" => new Ship(brand, measurements, estimatedValue),
-                "motercycle" => new Motorcycle(brand, measurements, estimatedValue),
+                "motorcycle" => new Motorcycle(brand, measurements, estimatedValue),
                 "gameconsole" => new GameConsole(brand, measurements, estimatedValue),
                 "smartphone" => new Smartphone(brand, measurements, estimatedValue),
                 "television" => new Television(brand, measurements, estimatedValue),
@@ -260,7 +316,7 @@ namespace Veiling
 
         private static int askAmountOfObjects()
         {
-            Console.WriteLine("Please fill in a number of the amount of different random objects this auction could possibly sell.\nThe maximum is 30.");
+            Console.WriteLine("Please fill in a number of the amount of different random objects this auction could possibly sell.\nThe minimum amount is 1 and the maximum is 30.");
             var amountOfObjects = checkAmountOfObjectsToSell();
             Console.WriteLine("The chosen amount of objects to sell are {0}", amountOfObjects);
 
@@ -319,7 +375,7 @@ namespace Veiling
             {
                 Console.WriteLine("Please fill in the price you estimate your object is worth.");
                 Console.WriteLine("The price can be 2 digits after the dot. For example: 1,23. 0 is not allowed.");
-                Console.WriteLine("When filling in cents, make sure to use a ',' (comma) and not a '.' (dot)");
+                Console.WriteLine("When filling in cents, make sure to use a ',' (comma) and not a '.' (dot).");
 
                 var input = Console.ReadLine();
 
@@ -350,8 +406,8 @@ namespace Veiling
                         chosenObject = "ship";
                         break;
                     case "3":
-                    case "motercycle":
-                        chosenObject = "motercycle";
+                    case "motorcycle":
+                        chosenObject = "motorcycle";
                         break;
                     case "4":
                     case "gameconsole":
@@ -376,7 +432,6 @@ namespace Veiling
                     default:
                         Console.WriteLine("The input is not an option. Please select a correct option.");
                         Console.WriteLine("You can pick between:\n [1] Car\n [2] Ship\n [3] Motorcycle\n [4] Gameconsole\n [5] Smartphone\n [6] Television\n [7] Computer\n [8] Headphones");
-                        checkChosenObjectOfSale();
                         break;
                 }
             }
