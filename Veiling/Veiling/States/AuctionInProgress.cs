@@ -12,16 +12,15 @@ namespace Veiling.States
         /*implement notify stuff TODO*/
         public override void moveObjectOfSale()
         {
-            auctioneer.notifyBuyers();
             Console.WriteLine("Auctioneer is keeping the auction in progress");
         }
 
         public override void runState()
         {
-            moveObjectOfSale();
             auctioneer.setState(this);
-            auctioneer.setStartAuctionFinished(true);
-            Console.WriteLine("Changed state to {0}", GetType().Name);
+            Console.WriteLine("Changed state to {0}", this.GetType().Name);
+            auctioneer.notifyBuyers();
+            //Set finished bool in auctioneer
         }
     }
 }

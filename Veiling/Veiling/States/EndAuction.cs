@@ -28,8 +28,8 @@ namespace Veiling.States
         {
             moveObjectOfSale();
             auctioneer.setState(this);
-            auctioneer.setStartAuctionFinished(true);
-            Console.WriteLine("Changed state to {0}", GetType().Name);
+            auctioneer.setEndAuctionFinished(true);
+            Console.WriteLine("Changed state to {0}", this.GetType().Name);
         }
     }
 }

@@ -22,9 +22,10 @@ namespace Veiling.States
         public override void runState()
         {
             moveObjectOfSale();
+            auctioneer.setCurrentBid(auctioneer.getObjectOfSale().getEstimatedValue() * auctioneer.getStartBidPercentage());
             auctioneer.setState(this);
             auctioneer.setStartAuctionFinished(true);
-            Console.WriteLine("Changed state to {0}", GetType().Name);
+            Console.WriteLine("Changed state to {0}", this.GetType().Name);
         }
     }
 }
