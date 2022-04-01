@@ -1,10 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "xMiBYWn2ZqaR0XUOU18e95QSoBh7AdDqYd5eW00pVPhd4ho8FEQfmYfJyLR6N7htJe53D5a22qoXfQ0Xu0qRtA==",
+  "dgSpecHash": "0naVycKBN3/SEBu0tGzXdYFD6nYEujv2kPCena9Cz34pjFnLzXYvcR533R1ZgFJfwQpN2gTPJ2K6t5dyzJ+ncg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Kariem\\OneDrive\\Documenten\\GitHub\\Design-Patterns\\Veiling\\Veiling\\Veiling.csproj",
-  "expectedPackageFiles": [
-    "C:\\Users\\Kariem\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.18\\microsoft.netcore.app.host.win-x64.3.1.18.nupkg.sha512"
-  ],
+  "projectFilePath": "C:\\Users\\Robin\\OneDrive - NHL Stenden\\Documents\\GitHub\\Design-Patterns\\Veiling\\Veiling\\Veiling.csproj",
+  "expectedPackageFiles": [],
   "logs": []
 }

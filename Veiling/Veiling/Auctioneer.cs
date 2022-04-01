@@ -94,7 +94,7 @@ namespace Veiling
         public void setBuyers(List<IBuyer> newBuyers)
         {
             List<IBuyer> buyersWithAuctioneer = new List<IBuyer>();
-            foreach (IBuyer buyer in buyers)
+            foreach (IBuyer buyer in newBuyers)
             {
                 buyer.setAuctioneer(this);
                 buyersWithAuctioneer.Add(buyer);
@@ -166,29 +166,27 @@ namespace Veiling
             {
                 buyer.bid(getCurrentBid());
             }
-
             Console.WriteLine("The current bid is: {0}", getCurrentBid());
         }
 
         public void notifiedByBuyer(double bid)
         {
+            setLastBid(getCurrentBid());
             setCurrentBid(bid);
             notifyBuyers();
-
+            
             Timer lastBidCheckTimer = new Timer();
             lastBidCheckTimer.Elapsed += new ElapsedEventHandler(lastBidCheck);
-            lastBidCheckTimer.Interval = 30000;
+            lastBidCheckTimer.Interval = 10000;
             lastBidCheckTimer.Enabled = true;
         }
 
         private void lastBidCheck(object source, ElapsedEventArgs e)
         {
-            if (lastBid == getCurrentBid())
-            {
-                Console.WriteLine("Sold!");
-                getMoney();
-                setAuctionInProgressFinished(true);
-            }
+            Console.WriteLine("Sold!");
+            Console.WriteLine("The object of sale has been sold for: {0}", getCurrentBid());
+            getMoney();
+            setAuctionInProgressFinished(true);
         }
 
         public double getLastBid()

@@ -23,6 +23,7 @@ namespace Veiling.States
         {
             moveObjectOfSale();
             auctioneer.setCurrentBid(auctioneer.getObjectOfSale().getEstimatedValue() * auctioneer.getStartBidPercentage());
+            Console.WriteLine("The auction has started with the current bid: {0}", auctioneer.getCurrentBid());
             auctioneer.setState(this);
             auctioneer.setStartAuctionFinished(true);
             Console.WriteLine("Changed state to {0}", this.GetType().Name);

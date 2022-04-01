@@ -71,6 +71,8 @@ namespace Veiling
         private static void simulateBuildAuction(Auction auction)
         {
             Auctioneer auctioneer = auction.getAuctioneer();
+            auctioneer.setAuction(auction);
+            auctioneer.setBuyers(auction.getBuyers());
             State start = new StartAuction(auctioneer);
             State inProgress = new AuctionInProgress(auctioneer);
             State end = new EndAuction(auctioneer);
