@@ -11,7 +11,7 @@ namespace Veiling
         {
             Console.WriteLine("Welcome to the auction simulator.\nPlease press a key to choose an auction to simulate. Then press enter.");
             Console.WriteLine(" [1] Auction inside a small warehouse.\n [2] Auction inside a big warehouse.\n [3] An online auction.\n [4] Create your own auction.");
-            var chosenAuction = Console.ReadLine();
+            String chosenAuction = Console.ReadLine();
             chooseTypeOfSimulation(chosenAuction);
         }
 
@@ -34,7 +34,7 @@ namespace Veiling
                 default:
                     Console.WriteLine("Sorry, the chosen option does not exist. Please choose a correct option.");
                     Console.WriteLine(" [1] Auction inside a small warehouse.\n [2] Auction inside a big warehouse.\n [3] An online auction.\n [4] Create your own auction.");
-                    var newChosenSimulation = Console.ReadLine();
+                    String newChosenSimulation = Console.ReadLine();
                     chooseTypeOfSimulation(newChosenSimulation);
                     break;
             }
@@ -57,7 +57,7 @@ namespace Veiling
                 default:
                     Console.WriteLine("Sorry, this option does not exist. Please select an option that does.");
                     Console.WriteLine(" [1] Auction inside a small warehouse.\n [2] Auction inside a big warehouse.\n [3] An online auction.");
-                    var newChosenAuction = Console.ReadLine();
+                    String newChosenAuction = Console.ReadLine();
                     chooseAuction(newChosenAuction);
                     break;
             }
@@ -70,10 +70,10 @@ namespace Veiling
 
         private static void simulateBuildAuction(Auction auction)
         {
-            var auctioneer = auction.getAuctioneer();
-            var start = new StartAuction(auctioneer);
-            var inProgress = new AuctionInProgress(auctioneer);
-            var end = new EndAuction(auctioneer);
+            Auctioneer auctioneer = auction.getAuctioneer();
+            State start = new StartAuction(auctioneer);
+            State inProgress = new AuctionInProgress(auctioneer);
+            State end = new EndAuction(auctioneer);
 
             Console.WriteLine("Time to simulate the auction. Type of auction that will be simulated: {0}", auction.getAuctionType());
 
@@ -110,10 +110,10 @@ namespace Veiling
         {
             Console.WriteLine("The small warehouse auction will be made.");
 
-            var amountOfBuyers = askAmountOfBuyers();
-            var amountOfObjects = askAmountOfObjects();
+            int amountOfBuyers = askAmountOfBuyers();
+            int amountOfObjects = askAmountOfObjects();
 
-            var auction = buildPredefinedAuction("SW", amountOfBuyers, amountOfObjects);
+            Auction auction = buildPredefinedAuction("SW", amountOfBuyers, amountOfObjects);
             simulateBuildAuction(auction);
         }
 
@@ -121,10 +121,10 @@ namespace Veiling
         {
             Console.WriteLine("The big warehouse auction will be made.");
 
-            var amountOfBuyers = askAmountOfBuyers();
-            var amountOfObjects = askAmountOfObjects();
+            int amountOfBuyers = askAmountOfBuyers();
+            int amountOfObjects = askAmountOfObjects();
 
-            var auction = buildPredefinedAuction("BW", amountOfBuyers, amountOfObjects);
+            Auction auction = buildPredefinedAuction("BW", amountOfBuyers, amountOfObjects);
             simulateBuildAuction(auction);
         }
 
@@ -132,10 +132,10 @@ namespace Veiling
         {
             Console.WriteLine("The online auction will be made.");
 
-            var amountOfBuyers = askAmountOfBuyers();
-            var amountOfObjects = askAmountOfObjects();
+            int amountOfBuyers = askAmountOfBuyers();
+            int amountOfObjects = askAmountOfObjects();
 
-            var auction = buildPredefinedAuction("O", amountOfBuyers, amountOfObjects);
+            Auction auction = buildPredefinedAuction("O", amountOfBuyers, amountOfObjects);
             simulateBuildAuction(auction);
         }
 
@@ -144,7 +144,7 @@ namespace Veiling
             Console.WriteLine("You will create your own auction. What type of auction would you like to create?");
             Console.WriteLine(" [1] Auction inside a small warehouse.\n [2] Auction inside a big warehouse.\n [3] An online auction.");
 
-            var auctionType = Console.ReadLine();
+            String auctionType = Console.ReadLine();
             chooseAuction(auctionType);
         }
 
@@ -161,7 +161,7 @@ namespace Veiling
             addChosenObjectsOfSale(builder, amountOfObjects);
             addOwnObjectOfSale(builder, auctionType);
 
-            var auctioneer = new Auctioneer();
+            Auctioneer auctioneer = new Auctioneer();
             builder.addAuctioneer(auctioneer);
 
             return builder.getResult();
@@ -176,14 +176,14 @@ namespace Veiling
                 _ => new ConcreteAuctionBuilderO(),
             };
 
-            var amountOfBuyers = askAmountOfBuyers();
-            var amountOfObjects = askAmountOfObjects();
+            int amountOfBuyers = askAmountOfBuyers();
+            int amountOfObjects = askAmountOfObjects();
 
             addChosenBuyers(builder, amountOfBuyers);
             addChosenObjectsOfSale(builder, amountOfObjects);
             addOwnObjectOfSale(builder, auctionType);
 
-            var auctioneer = new Auctioneer();
+            Auctioneer auctioneer = new Auctioneer();
             builder.addAuctioneer(auctioneer);
 
             return builder.getResult();
@@ -194,7 +194,7 @@ namespace Veiling
             Random random = new Random();
             for (int i = 1; i <= amountOfBuyers; i++) //adds  amount of buyers to the auction
             {
-                var wallet = 10000 + (random.NextDouble() * (100000 - 10000)); //add random amount of money to wallet between 10.000 and 100.000
+                double wallet = 10000 + (random.NextDouble() * (100000 - 10000)); //add random amount of money to wallet between 10.000 and 100.000
                 builder.addBuyer(new ConcreteBuyer(i, wallet)); //adds buyer to auction
             }
         }
@@ -213,7 +213,7 @@ namespace Veiling
 
             for (int i = 0; i < amountOfObjects; i++)
             {
-                var randomInt = random.Next(1, 8);
+                int randomInt = random.Next(1, 8);
                 ObjectOfSale objectToSell = randomInt switch
                 {
                     1 => new Car("Ford", fordMeasurments, 5000.00),
@@ -245,7 +245,7 @@ namespace Veiling
         private static void addOwnObjectOfSale(IAuctionBuilder builder, String auctionType)
         {
             Console.WriteLine("Would you like to add an(other) object that will be sold at this auction?\n [yes] Add an object to the list\n [no] Do not add an object to the list.");
-            var answer = Console.ReadLine();
+            String answer = Console.ReadLine();
 
             if (answer == "yes")
             {
@@ -262,7 +262,7 @@ namespace Veiling
                         break;
                 }
 
-                var createdObject = askObjectToAdd();
+                ObjectOfSale createdObject = askObjectToAdd();
                 builder.addObjectOfSale(createdObject);
                 addOwnObjectOfSale(builder, auctionType);
             }
@@ -273,16 +273,16 @@ namespace Veiling
             Console.WriteLine("What for object do you want to add to the list of objects that will be sold at this auction?");
             Console.WriteLine("You can pick between:\n [1] Car\n [2] Ship\n [3] Motorcycle\n [4] Gameconsole\n [5] Smartphone\n [6] Television\n [7] Computer\n [8] Headphones");
 
-            var chosenObject = checkChosenObjectOfSale();
+            String chosenObject = checkChosenObjectOfSale();
             Console.WriteLine("Please specify the brand of your {0}", chosenObject);
-            var brand = Console.ReadLine();
+            String brand = Console.ReadLine();
 
-            var estimatedValue = checkEstimatedValueOfOOS();
+            double estimatedValue = checkEstimatedValueOfOOS();
             Console.WriteLine("Your given estimated value is {0}", estimatedValue);
 
-            var chosenObjectMeasurements = checkChosenOOSMeasurements();
+            int[] chosenObjectMeasurements = checkChosenOOSMeasurements();
 
-            var createdObject = createChosenObject(chosenObject, brand, chosenObjectMeasurements, estimatedValue);
+            ObjectOfSale createdObject = createChosenObject(chosenObject, brand, chosenObjectMeasurements, estimatedValue);
             return createdObject;
         }
 
@@ -306,7 +306,7 @@ namespace Veiling
         private static int askAmountOfBuyers()
         {
             Console.WriteLine("Please fill in a number of the amount of different buyers walking around the auction.\nThe minimum amount is 2 and the maximum is 25.");
-            var amountOfBuyers = checkAmountOfBuyers();
+            int amountOfBuyers = checkAmountOfBuyers();
             Console.WriteLine("The chosen amount of buyers are {0}", amountOfBuyers);
 
             return amountOfBuyers;
@@ -315,7 +315,7 @@ namespace Veiling
         private static int askAmountOfObjects()
         {
             Console.WriteLine("Please fill in a number of the amount of different random objects this auction could possibly sell.\nThe minimum amount is 1 and the maximum is 30.");
-            var amountOfObjects = checkAmountOfObjectsToSell();
+            int amountOfObjects = checkAmountOfObjectsToSell();
             Console.WriteLine("The chosen amount of objects to sell are {0}", amountOfObjects);
 
             return amountOfObjects;
@@ -328,7 +328,7 @@ namespace Veiling
             {
                 do
                 {
-                    var amountOfBuyersInput = Console.ReadLine();
+                    String amountOfBuyersInput = Console.ReadLine();
 
                     if (!int.TryParse(amountOfBuyersInput, out amountOfBuyers))
                         Console.WriteLine("Sorry, the given input is not a number. Please try again.");
@@ -350,7 +350,7 @@ namespace Veiling
             {
                 do
                 {
-                    var amountOfObjectsInput = Console.ReadLine();
+                    String amountOfObjectsInput = Console.ReadLine();
 
                     if (!int.TryParse(amountOfObjectsInput, out amountOfObjects))
                         Console.WriteLine("Sorry, the given input is not a number. Please try again.");
@@ -375,9 +375,9 @@ namespace Veiling
                 Console.WriteLine("The price can be 2 digits after the dot. For example: 1,23. 0 is not allowed.");
                 Console.WriteLine("When filling in cents, make sure to use a ',' (comma) and not a '.' (dot).");
 
-                var input = Console.ReadLine();
+                String givenEstimatedValue = Console.ReadLine();
 
-                if (!double.TryParse(input, out estimatedValue))
+                if (!double.TryParse(givenEstimatedValue, out estimatedValue))
                     Console.WriteLine("Sorry, the given input is not a number. Please try again.");
             }
             while (estimatedValue == 0);
@@ -391,9 +391,9 @@ namespace Veiling
 
             do
             {
-                var input = Console.ReadLine().ToLower();
+                String givenObject = Console.ReadLine().ToLower();
 
-                switch (input)
+                switch (givenObject)
                 {
                     case "1":
                     case "car":
@@ -446,9 +446,9 @@ namespace Veiling
             do
             {
                 Console.WriteLine("Please fill in de width of your chosen object in centimeters.");
-                var input = Console.ReadLine();
+                String givenWidth = Console.ReadLine();
 
-                if (!int.TryParse(input, out width))
+                if (!int.TryParse(givenWidth, out width))
                     Console.WriteLine("Sorry, the given input is not a number. Please try again.");
             }
             while (width == 0);
@@ -456,9 +456,9 @@ namespace Veiling
             do
             {
                 Console.WriteLine("Please fill in de height of your chosen object in centimeters.");
-                var input = Console.ReadLine();
+                String givenHeight = Console.ReadLine();
 
-                if (!int.TryParse(input, out height))
+                if (!int.TryParse(givenHeight, out height))
                     Console.WriteLine("Sorry, the given input is not a number. Please try again.");
             }
             while (height == 0);
@@ -466,9 +466,9 @@ namespace Veiling
             do
             {
                 Console.WriteLine("Please fill in de length of your chosen object in centimeters.");
-                var input = Console.ReadLine();
+                String givenLength = Console.ReadLine();
 
-                if (!int.TryParse(input, out length))
+                if (!int.TryParse(givenLength, out length))
                     Console.WriteLine("Sorry, the given input is not a number. Please try again.");
             }
             while (length == 0);
