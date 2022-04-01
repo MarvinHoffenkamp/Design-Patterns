@@ -71,8 +71,20 @@ namespace Veiling
         private static void simulateBuildAuction(Auction auction)
         {
             Auctioneer auctioneer = auction.getAuctioneer();
+
+            if (auction.getObjectsOfSale().Count > auction.getBuyers().Count)
+            {
+                var amountToRemove = auction.getObjectsOfSale().Count - auction.getBuyers().Count;
+                for (int i = 0; i < amountToRemove; i++)
+                {
+                    auction.getObjectsOfSale().RemoveAt(0);
+                }
+                Console.WriteLine("Removed {0} objects from objects to sell list, because there were more objects to sell then there were buyers.", amountToRemove);
+            }
+
             auctioneer.setAuction(auction);
             auctioneer.setBuyers(auction.getBuyers());
+
             State start = new StartAuction(auctioneer);
             State inProgress = new AuctionInProgress(auctioneer);
             State end = new EndAuction(auctioneer);
@@ -306,7 +318,7 @@ namespace Veiling
 
         private static int askAmountOfBuyers()
         {
-            Console.WriteLine("Please fill in a number of the amount of different buyers walking around the auction.\nThe minimum amount is 2 and the maximum is 25.");
+            Console.WriteLine("Please fill in a number of the amount of different buyers walking around the auction.\nThe minimum amount is 2 and the maximum is 50.");
             int amountOfBuyers = checkAmountOfBuyers();
             Console.WriteLine("The chosen amount of buyers are {0}", amountOfBuyers);
 
@@ -315,7 +327,7 @@ namespace Veiling
 
         private static int askAmountOfObjects()
         {
-            Console.WriteLine("Please fill in a number of the amount of different random objects this auction could possibly sell.\nThe minimum amount is 1 and the maximum is 30.");
+            Console.WriteLine("Please fill in a number of the amount of different random objects this auction could possibly sell.\nThe minimum amount is 1 and the maximum is 50.");
             int amountOfObjects = checkAmountOfObjectsToSell();
             Console.WriteLine("The chosen amount of objects to sell are {0}", amountOfObjects);
 
@@ -336,10 +348,10 @@ namespace Veiling
                 }
                 while (amountOfBuyers == 0);
 
-                if (amountOfBuyers != 0 && (amountOfBuyers < 2 || amountOfBuyers > 25))
-                    Console.WriteLine("Sorry, this number is out of bounds. Please make sure to pick a number between 2 and 25.");
+                if (amountOfBuyers != 0 && (amountOfBuyers < 2 || amountOfBuyers > 50))
+                    Console.WriteLine("Sorry, this number is out of bounds. Please make sure to pick a number between 2 and 50.");
             }
-            while (amountOfBuyers < 2 || amountOfBuyers > 25);
+            while (amountOfBuyers < 2 || amountOfBuyers > 50);
 
             return amountOfBuyers;
         }
@@ -358,8 +370,8 @@ namespace Veiling
                 }
                 while (amountOfObjects == 0);
 
-                if (amountOfObjects != 0 && amountOfObjects > 30)
-                    Console.WriteLine("Sorry, this number is out of bounds. Please make sure to pick a number lower then 31.");
+                if (amountOfObjects != 0 && amountOfObjects > 50)
+                    Console.WriteLine("Sorry, this number is out of bounds. Please make sure to pick a number lower then 51.");
             }
             while (amountOfObjects > 30);
 

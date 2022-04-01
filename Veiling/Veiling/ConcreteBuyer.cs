@@ -32,7 +32,7 @@ namespace Veiling
             //Alleen een nieuw bod doen wanneer de oude niet van de buyer is en het huidige bod lager is dan de koper in de portemonee heeft
             if(currentBid != buyersBid && currentBid < wallet)
             {
-                buyersBid = wallet; //Bied alles wat de buyer heeft, verander dit nog later
+                setBuyersBid(wallet);  //Bied alles wat de buyer heeft, verander dit nog later
                 getAuctioneer().notifiedByBuyer(buyersBid);
             }
         }
@@ -82,12 +82,12 @@ namespace Veiling
             currentBid = newCurrentBid;
         }
 
-        public double getDoneBid()
+        public double getBuyersBid()
         {
             return buyersBid;
         }
 
-        public void setDoneBid(double newDoneBid)
+        public void setBuyersBid(double newDoneBid)
         {
             buyersBid = newDoneBid;
         }

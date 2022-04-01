@@ -9,19 +9,17 @@ namespace Veiling.States
 
         }
 
-        //todo find out highest bid and move object to there
         public override void moveObjectOfSale()
         {
             var highestbid = auctioneer.getCurrentBid();
             foreach(IBuyer buyer in auctioneer.getBuyers())
             {
-                if(buyer.getDoneBid() == highestbid)
+                if(buyer.getBuyersBid() == highestbid)
                 {
                     buyer.addBoughtObject(auctioneer.getObjectOfSale());
                     break;
                 }
             }
-            Console.WriteLine("Object moved to buyer");
         }
 
         public override void runState()
@@ -29,7 +27,6 @@ namespace Veiling.States
             moveObjectOfSale();
             auctioneer.setState(this);
             auctioneer.setEndAuctionFinished(true);
-            Console.WriteLine("Changed state to {0}", this.GetType().Name);
         }
     }
 }

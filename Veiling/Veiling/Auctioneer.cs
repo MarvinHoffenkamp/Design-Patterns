@@ -20,7 +20,8 @@ namespace Veiling
         private bool startAuctinoFinished;
         private bool auctionInProgressFinished;
         private bool endAuctionFinished;
-        private int startBidPercentage;
+        private double startBidPercentage;
+        private int buyersNumberOfLastBid = 0;
 
         public Auctioneer()
         {
@@ -51,7 +52,7 @@ namespace Veiling
             var highestbid = getCurrentBid();
             foreach (IBuyer buyer in getBuyers())
             {
-                if (buyer.getDoneBid() == highestbid)
+                if (buyer.getBuyersBid() == highestbid)
                 {
                     buyer.setWallet(buyer.getWallet() - highestbid);
                     break;
@@ -164,29 +165,34 @@ namespace Veiling
         {
             foreach (IBuyer buyer in getBuyers())
             {
-                buyer.bid(getCurrentBid());
+                double current = getCurrentBid();
+                buyer.bid(current);
+
+                if (current != getCurrentBid())
+                {
+                    Console.WriteLine("The current bid is: {0}", getCurrentBid());
+                    setBuyersNumberOfLastBid(buyer.getBuyersNumber());
+                }
             }
-            Console.WriteLine("The current bid is: {0}", getCurrentBid());
+
+            lastBidCheck();
         }
 
         public void notifiedByBuyer(double bid)
         {
-            setLastBid(getCurrentBid());
             setCurrentBid(bid);
-            notifyBuyers();
-            
-            Timer lastBidCheckTimer = new Timer();
-            lastBidCheckTimer.Elapsed += new ElapsedEventHandler(lastBidCheck);
-            lastBidCheckTimer.Interval = 10000;
-            lastBidCheckTimer.Enabled = true;
         }
 
-        private void lastBidCheck(object source, ElapsedEventArgs e)
+        private void lastBidCheck()
         {
-            Console.WriteLine("Sold!");
-            Console.WriteLine("The object of sale has been sold for: {0}", getCurrentBid());
-            getMoney();
-            setAuctionInProgressFinished(true);
+            var buyer = getBuyers()[getBuyersNumberOfLastBid() - 1];
+            if (buyer.getBuyersBid() == getCurrentBid())
+            {
+                Console.WriteLine("Sold to the buyer with number {0}", getBuyersNumberOfLastBid());
+                Console.WriteLine("The object of sale has been sold for: {0}", getCurrentBid());
+                getMoney();
+                setAuctionInProgressFinished(true);
+            }
         }
 
         public double getLastBid()
@@ -228,7 +234,7 @@ namespace Veiling
             endAuctionFinished = finished;
         }
 
-        public int getStartBidPercentage()
+        public double getStartBidPercentage()
         {
             return startBidPercentage;
         }
@@ -238,6 +244,16 @@ namespace Veiling
             //Start bid can be between 10 - 70% of the estemated value
             Random startBidPercentage = new Random();
             return startBidPercentage.Next(10, 70);
+        }
+
+        public int getBuyersNumberOfLastBid()
+        {
+            return buyersNumberOfLastBid;
+        }
+
+        public void setBuyersNumberOfLastBid(int buyersNumber)
+        {
+            buyersNumberOfLastBid = buyersNumber;
         }
     }
 }

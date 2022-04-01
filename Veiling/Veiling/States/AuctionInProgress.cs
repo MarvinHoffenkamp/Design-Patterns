@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Veiling.States
+﻿namespace Veiling.States
 {
     class AuctionInProgress : State
     {
@@ -9,18 +7,15 @@ namespace Veiling.States
 
         }
 
-        /*implement notify stuff TODO*/
         public override void moveObjectOfSale()
         {
-            Console.WriteLine("Auctioneer is keeping the auction in progress");
+            //does nothing
         }
 
         public override void runState()
         {
             auctioneer.setState(this);
-            Console.WriteLine("Changed state to {0}", this.GetType().Name);
             auctioneer.notifyBuyers();
-            //Set finished bool in auctioneer
         }
     }
 }

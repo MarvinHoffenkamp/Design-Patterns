@@ -8,7 +8,7 @@ namespace Veiling
         void doBid();
         int getBuyersNumber();
         void setAuctioneer(Auctioneer auctioneer);
-        double getDoneBid();
+        double getBuyersBid();
         void addBoughtObject(ObjectOfSale newBoughtObject);
         double getWallet();
         void setWallet(double newWallet);
