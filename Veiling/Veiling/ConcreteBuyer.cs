@@ -5,7 +5,7 @@ using Veiling.ObjectsOfSale;
 
 namespace Veiling
 {
-    class ConcreteBuyer : Buyer
+    class ConcreteBuyer : IBuyer
     {
         private int buyersNumber;
         private double wallet;

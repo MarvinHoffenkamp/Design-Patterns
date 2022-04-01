@@ -11,7 +11,7 @@ namespace Veiling.States
         public override void moveObjectOfSale()
         {
             var highestbid = auctioneer.getCurrentBid();
-            foreach(Buyer buyer in auctioneer.getBuyers())
+            foreach(IBuyer buyer in auctioneer.getBuyers())
             {
                 if(buyer.getDoneBid() == highestbid)
                 {

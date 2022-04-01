@@ -15,7 +15,7 @@ namespace Veiling
         private ObjectOfSale objectOfSale;
         private double currentBid;
         private double lastBid;
-        private List<Buyer> buyers;
+        private List<IBuyer> buyers;
         private Auction auction;
         private bool startAuctinoFinished;
         private bool auctionInProgressFinished;
@@ -25,7 +25,7 @@ namespace Veiling
         {
             this.currentBid = 0.00;
             this.lastBid = 0.00;
-            this.buyers = new List<Buyer>();
+            this.buyers = new List<IBuyer>();
             this.objectOfSale = null;
             this.auction = null;
             this.startAuctinoFinished = false;
@@ -58,21 +58,21 @@ namespace Veiling
             this.auction.setObjectsOfSale(ObjectsOfSale);
         }
 
-        public List<Buyer> getBuyers()
+        public List<IBuyer> getBuyers()
         {
             return this.buyers;
         }
 
-        public void addBuyer(Buyer buyer)
+        public void addBuyer(IBuyer buyer)
         {
             buyer.setAuctioneer(this);
             this.buyers.Add(buyer);
         }
 
-        public void setBuyers(List<Buyer> newBuyers)
+        public void setBuyers(List<IBuyer> newBuyers)
         {
-            List<Buyer> buyersWithAuctioneer = new List<Buyer>();
-            foreach (Buyer buyer in buyers)
+            List<IBuyer> buyersWithAuctioneer = new List<IBuyer>();
+            foreach (IBuyer buyer in buyers)
             {
                 buyer.setAuctioneer(this);
                 buyersWithAuctioneer.Add(buyer);
@@ -139,19 +139,19 @@ namespace Veiling
             return auction;
         }
 
-        public void joinAuction(Buyer joiningBuyer)
+        public void joinAuction(IBuyer joiningBuyer)
         {
             addBuyer(joiningBuyer);
         }
 
-        public void leaveAuction(Buyer leavingBuyer)
+        public void leaveAuction(IBuyer leavingBuyer)
         {
             getBuyers().Remove(leavingBuyer);
         }
 
         public void notifyBuyers()
         {
-            foreach (Buyer buyer in getBuyers())
+            foreach (IBuyer buyer in getBuyers())
             {
                 buyer.bid(getCurrentBid());
             }

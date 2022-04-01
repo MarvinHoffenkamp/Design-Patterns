@@ -20,7 +20,7 @@ namespace Veiling.Auctions
             this.result.setAuctioneer(auctioneer);
         }
 
-        public void addBuyer(Buyer buyer)
+        public void addBuyer(IBuyer buyer)
         {
             this.result.addBuyer(buyer);
             Console.WriteLine("Buyer with number {0} started walking around the auction.", buyer.getBuyersNumber());

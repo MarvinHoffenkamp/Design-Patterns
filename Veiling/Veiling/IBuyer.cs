@@ -5,7 +5,7 @@ using Veiling.ObjectsOfSale;
 
 namespace Veiling
 {
-    interface Buyer
+    interface IBuyer
     {
         void bid(double price);
         void doBid();

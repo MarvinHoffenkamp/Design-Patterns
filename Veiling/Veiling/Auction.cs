@@ -10,13 +10,13 @@ namespace Veiling
     {
         private Auctioneer auctioneer;
         private List<ObjectOfSale> objectsOfSale;
-        private List<Buyer> buyers;
+        private List<IBuyer> buyers;
         private string auctionType;
 
         public Auction()
         {
             this.objectsOfSale = new List<ObjectOfSale>();
-            this.buyers = new List<Buyer>();
+            this.buyers = new List<IBuyer>();
         }
 
         public void setAuctioneer(Auctioneer auctioneer)
@@ -44,17 +44,17 @@ namespace Veiling
             this.objectsOfSale.Add(objectOfSale);
         }
 
-        public void setBuyers(List<Buyer> buyers)
+        public void setBuyers(List<IBuyer> buyers)
         {
             this.buyers = buyers;
         }
 
-        public List<Buyer> getBuyers()
+        public List<IBuyer> getBuyers()
         {
             return this.buyers;
         }
 
-        public void addBuyer(Buyer buyer)
+        public void addBuyer(IBuyer buyer)
         {
             this.buyers.Add(buyer);
         }
