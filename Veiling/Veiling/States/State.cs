@@ -9,11 +9,13 @@ namespace Veiling.States
     {
         protected Auctioneer auctioneer;
 
-        public void setContext(Auctioneer auctioneer)
+        public State(Auctioneer auctioneer)
         {
             this.auctioneer = auctioneer;
         }
+
         public abstract void moveObjectOfSale();
-        public abstract void setAuctionState(State state);
+
+        public abstract void runState();
     }
 }

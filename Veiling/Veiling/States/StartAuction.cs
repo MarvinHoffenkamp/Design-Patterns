@@ -7,6 +7,11 @@ namespace Veiling.States
 {
     class StartAuction : State
     {
+        public StartAuction(Auctioneer auctioneer) : base(auctioneer)
+        {
+            
+        }
+
         public override void moveObjectOfSale()
         {
             var OOS = this.auctioneer.getAuction().getObjectsOfSale();
@@ -14,12 +19,15 @@ namespace Veiling.States
             OOS.RemoveAt(0);
             this.auctioneer.setObjectOfSale(firstOOS);
             this.auctioneer.setObjectsOfSale(OOS);
+            Console.WriteLine("Object moved from auction");
         }
 
-        public override void setAuctionState(State state)
+        public override void runState()
         {
-            Console.WriteLine("auction state set!");
-            this.auctioneer.TransitionTo(state);
+            moveObjectOfSale();
+            this.auctioneer.setState(this);
+            this.auctioneer.setStartAuctionFinished(true);
+            Console.WriteLine("Changed state to {0}", this.GetType().Name);
         }
     }
 }

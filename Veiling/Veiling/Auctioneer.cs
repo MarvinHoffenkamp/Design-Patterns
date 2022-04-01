@@ -11,7 +11,7 @@ namespace Veiling
         /*
          * TODO: methods nu void, graag veranderen naar juiste return types wanneer mogelijk
          */
-        private State state = null;
+        private State state;
         private ObjectOfSale objectOfSale;
         private double currentBid;
         private double lastBid;
@@ -31,6 +31,7 @@ namespace Veiling
             this.startAuctinoFinished = false;
             this.auctionInProgressFinished = false;
             this.endAuctionFinished = false;
+            this.state = null;
         }
 
         public void setAuction(Auction auction)
@@ -46,6 +47,11 @@ namespace Veiling
         public void setCurrentBid(double newCurrentBid)
         {
             currentBid = newCurrentBid;
+        }
+
+        public ObjectOfSale getObjectOfSale()
+        {
+            return this.objectOfSale;
         }
 
         public void setObjectOfSale(ObjectOfSale objectOfSale)
@@ -86,57 +92,46 @@ namespace Veiling
             //get current state, then check
             if (this.state == null)
             {
-                this.state = state;
-                Console.WriteLine("Changed state to {0}", this.state.GetType().Name);
+                state.runState();
             }
             else if (this.state.GetType().Name == "StartAuction")
             {
                 if (state.GetType().Name == "AuctionInProgress")
                 {
-                    this.state = state;
-                    Console.WriteLine("Changed state to {0}", this.state.GetType().Name);
+                    state.runState();
                 }
             }
             else if (this.state.GetType().Name == "AuctionInProgress")
             {
                 if (state.GetType().Name == "EndAuction")
                 {
-                    this.state = state;
-                    Console.WriteLine("Changed state to {0}", this.state.GetType().Name);
+                    state.runState();
                 }
             }
             else if (state.GetType().Name == "StartAuction")
             {
-                //assume state is EndAuction, hence only check if incoming state is StartAuction
-                this.state = state;
-                Console.WriteLine("Changed state to {0}", this.state.GetType().Name);
+                state.runState();
             }
             else if (this.state.GetType().Name == "EndAuction")
             {
                 this.state = null;
-                Console.WriteLine("Changed state to {0}", this.state.GetType().Name);
+                Console.WriteLine("Changed state to idle");
             }
-            this.state.setContext(this);
         }
 
-        public void moveObjectOfSale(ObjectOfSale objectOfSale)
+        public State getState()
         {
-            
+            return this.state;
         }
 
-        public void setAuctionState()
+        public void setState(State newState)
         {
-
-        }
-
-        public ObjectOfSale getObjectOfSale()
-        {
-            return this.objectOfSale;
+            this.state = newState;
         }
         
         public Auction getAuction()
         {
-            return auction;
+            return this.auction;
         }
 
         public void joinAuction(IBuyer joiningBuyer)
